@@ -14,10 +14,11 @@
 		3FF8EB471D1C65840049A07F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8EB451D1C65840049A07F /* Main.storyboard */; };
 		3FF8EB491D1C65840049A07F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8EB481D1C65840049A07F /* Assets.xcassets */; };
 		3FF8EB4C1D1C65840049A07F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8EB4A1D1C65840049A07F /* LaunchScreen.storyboard */; };
+		3FF8EB541D1C7E450049A07F /* TouchPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8EB531D1C7E450049A07F /* TouchPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3FF8EB3A1D1C65840049A07F /* TipTapTop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipTapTop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FF8EB3A1D1C65840049A07F /* TipTapTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipTapTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FF8EB3D1D1C65840049A07F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FF8EB3F1D1C65840049A07F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		3FF8EB411D1C65840049A07F /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -26,6 +27,7 @@
 		3FF8EB481D1C65840049A07F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FF8EB4B1D1C65840049A07F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FF8EB4D1D1C65840049A07F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FF8EB531D1C7E450049A07F /* TouchPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +52,7 @@
 		3FF8EB3B1D1C65840049A07F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3FF8EB3A1D1C65840049A07F /* TipTapTop.app */,
+				3FF8EB3A1D1C65840049A07F /* TipTapTouch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +68,7 @@
 				3FF8EB481D1C65840049A07F /* Assets.xcassets */,
 				3FF8EB4A1D1C65840049A07F /* LaunchScreen.storyboard */,
 				3FF8EB4D1D1C65840049A07F /* Info.plist */,
+				3FF8EB531D1C7E450049A07F /* TouchPoint.swift */,
 			);
 			path = TipTapTop;
 			sourceTree = "<group>";
@@ -73,9 +76,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3FF8EB391D1C65840049A07F /* TipTapTop */ = {
+		3FF8EB391D1C65840049A07F /* TipTapTouch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3FF8EB501D1C65840049A07F /* Build configuration list for PBXNativeTarget "TipTapTop" */;
+			buildConfigurationList = 3FF8EB501D1C65840049A07F /* Build configuration list for PBXNativeTarget "TipTapTouch" */;
 			buildPhases = (
 				3FF8EB361D1C65840049A07F /* Sources */,
 				3FF8EB371D1C65840049A07F /* Frameworks */,
@@ -85,9 +88,9 @@
 			);
 			dependencies = (
 			);
-			name = TipTapTop;
+			name = TipTapTouch;
 			productName = TipTapTop;
-			productReference = 3FF8EB3A1D1C65840049A07F /* TipTapTop.app */;
+			productReference = 3FF8EB3A1D1C65840049A07F /* TipTapTouch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -105,7 +108,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3FF8EB351D1C65840049A07F /* Build configuration list for PBXProject "TipTapTop" */;
+			buildConfigurationList = 3FF8EB351D1C65840049A07F /* Build configuration list for PBXProject "TipTapTouch" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -118,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3FF8EB391D1C65840049A07F /* TipTapTop */,
+				3FF8EB391D1C65840049A07F /* TipTapTouch */,
 			);
 		};
 /* End PBXProject section */
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FF8EB541D1C7E450049A07F /* TouchPoint.swift in Sources */,
 				3FF8EB421D1C65840049A07F /* GameScene.swift in Sources */,
 				3FF8EB441D1C65840049A07F /* GameViewController.swift in Sources */,
 				3FF8EB3E1D1C65840049A07F /* AppDelegate.swift in Sources */,
@@ -260,7 +264,7 @@
 				INFOPLIST_FILE = TipTapTop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JuJuLab.TipTapTop;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TipTapTouch;
 			};
 			name = Debug;
 		};
@@ -271,14 +275,14 @@
 				INFOPLIST_FILE = TipTapTop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JuJuLab.TipTapTop;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TipTapTouch;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3FF8EB351D1C65840049A07F /* Build configuration list for PBXProject "TipTapTop" */ = {
+		3FF8EB351D1C65840049A07F /* Build configuration list for PBXProject "TipTapTouch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3FF8EB4E1D1C65840049A07F /* Debug */,
@@ -287,7 +291,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3FF8EB501D1C65840049A07F /* Build configuration list for PBXNativeTarget "TipTapTop" */ = {
+		3FF8EB501D1C65840049A07F /* Build configuration list for PBXNativeTarget "TipTapTouch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3FF8EB511D1C65840049A07F /* Debug */,

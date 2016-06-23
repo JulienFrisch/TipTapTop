@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3FF8EB391D1C65840049A07F"
-               BuildableName = "TipTapTop.app"
-               BlueprintName = "TipTapTop"
-               ReferencedContainer = "container:TipTapTop.xcodeproj">
+               BuildableName = "TipTapTouch.app"
+               BlueprintName = "TipTapTouch"
+               ReferencedContainer = "container:TipTapTouch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3FF8EB391D1C65840049A07F"
-            BuildableName = "TipTapTop.app"
-            BlueprintName = "TipTapTop"
-            ReferencedContainer = "container:TipTapTop.xcodeproj">
+            BuildableName = "TipTapTouch.app"
+            BlueprintName = "TipTapTouch"
+            ReferencedContainer = "container:TipTapTouch.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3FF8EB391D1C65840049A07F"
-            BuildableName = "TipTapTop.app"
-            BlueprintName = "TipTapTop"
-            ReferencedContainer = "container:TipTapTop.xcodeproj">
+            BuildableName = "TipTapTouch.app"
+            BlueprintName = "TipTapTouch"
+            ReferencedContainer = "container:TipTapTouch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3FF8EB391D1C65840049A07F"
-            BuildableName = "TipTapTop.app"
-            BlueprintName = "TipTapTop"
-            ReferencedContainer = "container:TipTapTop.xcodeproj">
+            BuildableName = "TipTapTouch.app"
+            BlueprintName = "TipTapTouch"
+            ReferencedContainer = "container:TipTapTouch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

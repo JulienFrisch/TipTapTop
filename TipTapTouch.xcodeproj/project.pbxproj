@@ -15,6 +15,7 @@
 		3FF8EB491D1C65840049A07F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8EB481D1C65840049A07F /* Assets.xcassets */; };
 		3FF8EB4C1D1C65840049A07F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8EB4A1D1C65840049A07F /* LaunchScreen.storyboard */; };
 		3FF8EB541D1C7E450049A07F /* TouchPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8EB531D1C7E450049A07F /* TouchPoint.swift */; };
+		3FF8EB561D1C9A080049A07F /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8EB551D1C9A080049A07F /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3FF8EB4B1D1C65840049A07F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FF8EB4D1D1C65840049A07F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FF8EB531D1C7E450049A07F /* TouchPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchPoint.swift; sourceTree = "<group>"; };
+		3FF8EB551D1C9A080049A07F /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +65,13 @@
 				3FF8EB3D1D1C65840049A07F /* AppDelegate.swift */,
 				3FF8EB3F1D1C65840049A07F /* GameScene.sks */,
 				3FF8EB411D1C65840049A07F /* GameScene.swift */,
+				3FF8EB531D1C7E450049A07F /* TouchPoint.swift */,
+				3FF8EB551D1C9A080049A07F /* ColorExtension.swift */,
 				3FF8EB431D1C65840049A07F /* GameViewController.swift */,
 				3FF8EB451D1C65840049A07F /* Main.storyboard */,
 				3FF8EB481D1C65840049A07F /* Assets.xcassets */,
 				3FF8EB4A1D1C65840049A07F /* LaunchScreen.storyboard */,
 				3FF8EB4D1D1C65840049A07F /* Info.plist */,
-				3FF8EB531D1C7E450049A07F /* TouchPoint.swift */,
 			);
 			path = TipTapTop;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 				3FF8EB421D1C65840049A07F /* GameScene.swift in Sources */,
 				3FF8EB441D1C65840049A07F /* GameViewController.swift in Sources */,
 				3FF8EB3E1D1C65840049A07F /* AppDelegate.swift in Sources */,
+				3FF8EB561D1C9A080049A07F /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

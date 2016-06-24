@@ -9,21 +9,27 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    var touchPoints = [TouchPoint]()
     
+    //TO-D: put variables values in a class or properties file
+
+    var touchPads = [TouchPad]()
+    let maxTouchPadsActivated = 5
     
+    //Time tracking variables
+    let switchTime: NSTimeInterval = 5.0
+    var lastUpdateTimeInterval:NSTimeInterval = 0.0
+    var timeSinceLastSwitch: NSTimeInterval = 0.0
+    
+    //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
-        //we place 8 touchpoints
+        //we place 8 touchpoints, and add them to the touchpoints variable
         for i in 0...7 {
             let x = (self.frame.size.width / 4) * CGFloat(1 + (i % 2) * 2)
             let y = (self.frame.size.height / 8) * CGFloat(1 + i - i % 2)
-            let touchpoint = TouchPoint.createAtPosition(CGPointMake(x, y))
-            self.addChild(touchpoint)
-            self.touchPoints.append(touchpoint)
+            let touchpad = TouchPad.createAtPosition(CGPointMake(x, y))
+            self.addChild(touchpad)
+            self.touchPads.append(touchpad)
         }
-        //let firstTouchPoint = TouchPoint.createAtPosition(CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)))
-        //self.addChild(firstTouchPoint)
-        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -45,10 +51,67 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        for touchpoint in self.touchPoints {
-            touchpoint.updateColor(currentTime)
+        //we update our touchPads
+        for touchpad in self.touchPads {
+            touchpad.updateColor(currentTime)
         }
-        //let touchpoint = self.childNodeWithName("TouchPoint") as! TouchPoint
-        //touchpoint.updateColor(currentTime)
+        
+        //we update our time variables
+        if (self.lastUpdateTimeInterval != 0){
+            self.timeSinceLastSwitch += currentTime - self.lastUpdateTimeInterval
+        }
+        self.lastUpdateTimeInterval = currentTime
+        
+        //we check if it is time to make a switch
+        if (self.timeSinceLastSwitch > self.switchTime) {
+            //we run our random sequnce
+            runRandomSwitch(self.touchPads, maxTouchPadsActivated: self.maxTouchPadsActivated, currentTime: currentTime)
+            
+            //we update the time since we performed a switch
+            self.timeSinceLastSwitch = 0
+        }
     }
+    
+    //MARK: Helper methods
+    
+    /**
+    Run a random sequence of touchpad activations
+    */
+    func runRandomSwitch(touchPads: [TouchPad], maxTouchPadsActivated: Int, currentTime: NSTimeInterval){
+        let activatedTouchPads = filterTouchPads(touchPads, on: true)
+        let notActivatedTouchPads = filterTouchPads(touchPads, on: false)
+        
+        //if we have not reached the maxTouchPointsActivated, we just activate another touchpad
+        if activatedTouchPads.count < maxTouchPadsActivated {
+            randomTouchPad(notActivatedTouchPads).turnOn(currentTime)
+            
+        } else {
+            //if we haven't, then weturn one activated touchpad off and activate another one
+            randomTouchPad(activatedTouchPads).turnOff(currentTime)
+            randomTouchPad(notActivatedTouchPads).turnOn(currentTime)
+        }
+    }
+    
+    /**
+    Filter a set of TouchPads to keep only the activated or not activated ones
+    */
+    func filterTouchPads(touchPads: [TouchPad], on: Bool)->[TouchPad]{
+        var filteredTouchPads = [TouchPad]()
+        for touchpad in touchPads {
+            if touchpad.on == on {
+                filteredTouchPads.append(touchpad)
+            }
+        }
+        return filteredTouchPads
+    }
+    
+    /**
+    Randomly select a touchpoint among a set of touchpoints
+    */
+    func randomTouchPad(touchPads: [TouchPad]) -> TouchPad {
+        let numberOfTouchPads = touchPads.count
+        let i = Int(arc4random_uniform(UInt32(numberOfTouchPads)))
+        return touchPads[i]
+    }
+ 
 }

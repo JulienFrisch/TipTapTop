@@ -9,15 +9,20 @@
 import SpriteKit
 
 class TouchPad: SKShapeNode {
-    
-    //MARK: Variables
     //TO-DO: Create a property of class file to store those values
-    var on: Bool = false
-    static let radius: CGFloat = 75.0
+
+    //MARK: Status Variables
+    var on: Bool = false //to show if the touchpad is activated
+    var touched: Bool = false
+    var timeOut: Bool = false //to show if the touchPad has not been touched in time
+
+    //Color and form Variables
     let neutralColor = UIColor.grayColor()
     let touchColor = UIColor.yellowColor()
     let warningColor = UIColor.redColor()
-    var touched: Bool = false
+    static let radius: CGFloat = 75.0
+
+    //Time variables
     let timeLimit: NSTimeInterval = 5.0
     var lastTouched: NSTimeInterval = 0.0
     
@@ -106,15 +111,26 @@ class TouchPad: SKShapeNode {
     
     /**
     Update the color depending on the status of the touchpad and whether or not it is being touched
+     return false if the TouchPad has not been touched within the allocated time limit
     */
-    func updateColor(currentTime: NSTimeInterval){
+    func updateTouchPad(currentTime: NSTimeInterval) -> Bool {
         
-        //if the touchpoint is on but not touched
+        //if the touchpad is on but not touched
         if self.on && !self.touched {
             let progress = (currentTime - self.lastTouched) / self.timeLimit
-            self.fillColor = self.touchColor.interpolateRGBColorTo(self.warningColor, fraction: CGFloat(progress))
+            //if the touchpad has not been touched in time
+            if progress > 1 {
+                return false
+            } else {
+                //if we have some time left
+                self.fillColor = self.touchColor.interpolateRGBColorTo(self.warningColor, fraction: CGFloat(progress))
+                return true
+            }
+
+        } else {
+            //if the touchpad is off or if the touchpad is currently touched, we return true
+            return true
         }
-        
     }
 
 

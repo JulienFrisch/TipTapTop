@@ -13,12 +13,15 @@ class GameScene: SKScene {
     //TO-D: put variables values in a class or properties file
 
     var touchPads = [TouchPad]()
-    let maxTouchPadsActivated = 5
+    let maxTouchPadsActivated = 4
     
     //Time tracking variables
     let switchTime: NSTimeInterval = 5.0
     var lastUpdateTimeInterval:NSTimeInterval = 0.0
     var timeSinceLastSwitch: NSTimeInterval = 0.0
+    
+    //Game Status
+    var gameIsOver = false
     
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
@@ -51,25 +54,34 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        //we update our touchPads
-        for touchpad in self.touchPads {
-            touchpad.updateColor(currentTime)
-        }
-        
-        //we update our time variables
-        if (self.lastUpdateTimeInterval != 0){
-            self.timeSinceLastSwitch += currentTime - self.lastUpdateTimeInterval
-        }
-        self.lastUpdateTimeInterval = currentTime
-        
-        //we check if it is time to make a switch
-        if (self.timeSinceLastSwitch > self.switchTime) {
-            //we run our random sequnce
-            runRandomSwitch(self.touchPads, maxTouchPadsActivated: self.maxTouchPadsActivated, currentTime: currentTime)
+        //we do not run the update function if the game is game over
+        if !gameIsOver
+        {
+            //we update our touchPads and check they have been touched in time
+            for touchpad in self.touchPads {
+                let touchedInTime = touchpad.updateTouchPad(currentTime)
+                //if a touchpad is not touched in time, we launch the game over
+                if !touchedInTime {
+                    self.gameOver()
+                }
+            }
             
-            //we update the time since we performed a switch
-            self.timeSinceLastSwitch = 0
+            //we update our time variables
+            if (self.lastUpdateTimeInterval != 0){
+                self.timeSinceLastSwitch += currentTime - self.lastUpdateTimeInterval
+            }
+            self.lastUpdateTimeInterval = currentTime
+            
+            //we check if it is time to make a switch
+            if (self.timeSinceLastSwitch > self.switchTime) {
+                //we run our random sequnce
+                runRandomSwitch(self.touchPads, maxTouchPadsActivated: self.maxTouchPadsActivated, currentTime: currentTime)
+                
+                //we update the time since we performed a switch
+                self.timeSinceLastSwitch = 0
+            }
         }
+
     }
     
     //MARK: Helper methods
@@ -112,6 +124,14 @@ class GameScene: SKScene {
         let numberOfTouchPads = touchPads.count
         let i = Int(arc4random_uniform(UInt32(numberOfTouchPads)))
         return touchPads[i]
+    }
+    
+    /**
+    Game Over script
+    */
+    func gameOver(){
+        self.gameIsOver = true
+        print("Game Over")
     }
  
 }

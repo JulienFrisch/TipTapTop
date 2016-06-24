@@ -55,16 +55,20 @@ class TouchPad: SKShapeNode {
     if the touchpoint is touched, a set of actions are launched
     */
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //we update the touched value
-        self.touched = true
-        let currentTime = event!.timestamp
-        
-        if self.on {
-            //we re-initiate the turnOn
-            self.turnOn(currentTime)
-        } else {
-            print("touching when not required")
+        //if we are over our time limit, we disable all actions
+        if !timeOut {
+            //we update the touched value
+            self.touched = true
+            let currentTime = event!.timestamp
+            
+            if self.on {
+                //we re-initiate the turnOn
+                self.turnOn(currentTime)
+            } else {
+                print("touching when not required")
+            }
         }
+
     }
     
     /**
@@ -115,11 +119,12 @@ class TouchPad: SKShapeNode {
     */
     func updateTouchPad(currentTime: NSTimeInterval) -> Bool {
         
-        //if the touchpad is on but not touched
+        //if the touchpad is on but not touched and we are not over our time limit
         if self.on && !self.touched {
             let progress = (currentTime - self.lastTouched) / self.timeLimit
             //if the touchpad has not been touched in time
             if progress > 1 {
+                self.timeOut = true
                 return false
             } else {
                 //if we have some time left

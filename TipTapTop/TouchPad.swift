@@ -69,6 +69,9 @@ class TouchPad: SKShapeNode {
         //we update the touched value
         self.touched = false
         print("touches End")
+        
+        //we update the lastTouched variable
+        self.lastTouched = event!.timestamp
     }
     
 

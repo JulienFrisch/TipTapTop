@@ -77,7 +77,6 @@ class TouchPad: SKShapeNode {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //we update the touched value
         self.touched = false
-        print("touches End")
         
         //we update the lastTouched variable
         self.lastTouched = event!.timestamp

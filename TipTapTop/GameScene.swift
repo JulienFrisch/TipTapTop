@@ -34,6 +34,11 @@ class GameScene: SKScene {
         //we define the scene color
         self.backgroundColor = self.backColor
         
+        //we add the progress bar
+        print("self.frame.size.height: \(self.frame.size.height)")
+        let progressBar = ProgressNode.progressAtPosition(CGPointMake(10, self.frame.size.height - 10), inFrame: self.frame)
+        self.addChild(progressBar)
+        
         //we place 8 touchpoints, and add them to the touchpoints variable
         for i in 0...7 {
             let x = (self.frame.size.width / 4) * CGFloat(1 + (i % 2) * 2)

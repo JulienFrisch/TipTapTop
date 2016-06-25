@@ -11,7 +11,8 @@ import SpriteKit
 class ProgressNode: SKNode {
     
     var progress = 0
-    static let height: CGFloat = 5.0
+    let height: CGFloat = 5.0
+    let verticalInterspace: CGFloat = 20.0
     
     /**
     Return a progress node that will have the width of the frame
@@ -20,14 +21,17 @@ class ProgressNode: SKNode {
         let progressNode = ProgressNode()
         progressNode.position = position
         
+        
         //we make sure the node is in front of everything else
         progressNode.zPosition = 10
         progressNode.name = "ProgressNode"
         
+        
         //we add the grey bar that shows the total expected duration
-        let rect = CGRect(x: 0, y: 0, width: inFrame.width - 20 , height: ProgressNode.height)
+        let rect = CGRect(x: progressNode.verticalInterspace , y: 0, width: inFrame.width - 2 * progressNode.verticalInterspace , height: progressNode.height)
         let greyBar = SKShapeNode(rect: rect, cornerRadius: 1.0)
         greyBar.fillColor = UIColor.grayColor()
+        
         progressNode.addChild(greyBar)
         
         return progressNode

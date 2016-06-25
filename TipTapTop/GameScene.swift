@@ -29,20 +29,22 @@ class GameScene: SKScene {
     var gameIsOver = false
     var readyForRestart = false
     
+    //Progress bar
+    let progressBarVerticalIntervalSpace: CGFloat = 10.0
+    
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
         //we define the scene color
         self.backgroundColor = self.backColor
         
         //we add the progress bar
-        print("self.frame.size.height: \(self.frame.size.height)")
-        let progressBar = ProgressNode.progressAtPosition(CGPointMake(10, self.frame.size.height - 10), inFrame: self.frame)
+        let progressBar = ProgressNode.progressAtPosition(CGPointMake(0, self.frame.size.height - self.progressBarVerticalIntervalSpace), inFrame: self.frame) as ProgressNode
         self.addChild(progressBar)
         
         //we place 8 touchpoints, and add them to the touchpoints variable
         for i in 0...7 {
             let x = (self.frame.size.width / 4) * CGFloat(1 + (i % 2) * 2)
-            let y = (self.frame.size.height / 8) * CGFloat(1 + i - i % 2)
+            let y = ((self.frame.size.height - progressBar.height - 2 * self.progressBarVerticalIntervalSpace) / 8) * CGFloat(1 + i - i % 2)
             let touchpad = TouchPad.createAtPosition(CGPointMake(x, y))
             self.addChild(touchpad)
             self.touchPads.append(touchpad)

@@ -12,19 +12,28 @@ class GameScene: SKScene {
     
     //TO-D: put variables values in a class or properties file
 
+    //Scene variables
     var touchPads = [TouchPad]()
+    let backColor = UIColor.cyanColor()
+    
+    //GamePlay Configuration
     let maxTouchPadsActivated = 4
+    let switchTime: NSTimeInterval = 5.0
+
     
     //Time tracking variables
-    let switchTime: NSTimeInterval = 5.0
     var lastUpdateTimeInterval:NSTimeInterval = 0.0
     var timeSinceLastSwitch: NSTimeInterval = 0.0
     
     //Game Status
     var gameIsOver = false
+    var readyForRestart = false
     
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
+        //we define the scene color
+        self.backgroundColor = self.backColor
+        
         //we place 8 touchpoints, and add them to the touchpoints variable
         for i in 0...7 {
             let x = (self.frame.size.width / 4) * CGFloat(1 + (i % 2) * 2)
@@ -36,23 +45,18 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        for touch in touches {
-//            let location = touch.locationInNode(self)
-//            
-//            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-//            
-//            sprite.xScale = 0.5
-//            sprite.yScale = 0.5
-//            sprite.position = location
-//            
-//            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-//            
-//            sprite.runAction(SKAction.repeatActionForever(action))
-//            
-//            self.addChild(sprite)
-//        }
+    if (self.readyForRestart) { //we restart the game
+        //we remove all the nodes
+        for node: SKNode in self.children {
+            node.removeFromParent()
+        }
+        
+        //we load a new view
+        let gameScene = GameScene(size: self.frame.size)
+        self.view?.presentScene(gameScene)
+        }
     }
-   
+
     override func update(currentTime: CFTimeInterval) {
         //we do not run the update function if the game is game over
         if !gameIsOver
@@ -62,7 +66,7 @@ class GameScene: SKScene {
                 let touchedInTime = touchpad.updateTouchPad(currentTime)
                 //if a touchpad is not touched in time, we launch the game over
                 if !touchedInTime {
-                    self.gameOver()
+                    self.performGameOver()
                 }
             }
             
@@ -129,9 +133,21 @@ class GameScene: SKScene {
     /**
     Game Over script
     */
-    func gameOver(){
+    func performGameOver(){
+        //we update the gameisover variable
         self.gameIsOver = true
         print("Game Over")
+        
+        //we add a gameover label
+        let gameOver = GameOverNode.gameOverAtPosition(CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)))
+        self.addChild(gameOver)
+        
+        //play game over animation
+        gameOver.performAnimation()
+        
+        //get ready for restart
+        self.readyForRestart = true
+
     }
  
 }

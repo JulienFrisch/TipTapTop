@@ -67,6 +67,9 @@ class ProgressNode: SKNode {
         let rectGreen = CGRect(x: self.verticalInterspace , y: 0, width: min(progress,1) * self.computedWidth , height: self.height)
         let greenBar = SKShapeNode(rect: rectGreen, cornerRadius: self.height / 2)
         greenBar.fillColor = UIColor.greenColor()
+        
+        //we name the green bar so it can be removed later
+        greenBar.name = "GreenBar"
         //we place the greenbar in front of the grey bar
         //TO-DO: remove ZPOsition
         greenBar.zPosition = 11

@@ -18,8 +18,9 @@ class GameScene: SKScene {
     
     //GamePlay Configuration
     let maxTouchPadsActivated = 4
-    let switchTime: NSTimeInterval = 5.0
-    let maxGameTime: NSTimeInterval = 20
+    let initialSwitchTime: NSTimeInterval = 5.0
+    let finalSwitchTime: NSTimeInterval = 2.0
+    let maxGameTime: NSTimeInterval = 60 * 1
 
     
     //Time tracking variables
@@ -90,8 +91,12 @@ class GameScene: SKScene {
                 }
                 self.lastUpdateTimeInterval = currentTime
                 
+                //we compute the progress of the game and the associated switch time
+                let progress: CGFloat = CGFloat(self.currentGameTime) / CGFloat(self.maxGameTime)
+                let currentSwitchTime: NSTimeInterval = self.initialSwitchTime * (1 - Double(progress)) + self.finalSwitchTime * Double(progress)
+                
                 //we check if it is time to make a switch
-                if (self.timeSinceLastSwitch > self.switchTime) {
+                if (self.timeSinceLastSwitch > currentSwitchTime) {
                     //we run our random sequnce
                     runRandomSwitch(self.touchPads, maxTouchPadsActivated: self.maxTouchPadsActivated, currentTime: currentTime)
                     
@@ -102,7 +107,7 @@ class GameScene: SKScene {
                 //we update our progression bar
                 //TO-DO: remove force unwrapping
                 let progressionBar = self.childNodeWithName("ProgressNode") as! ProgressNode
-                progressionBar.updateProgress((CGFloat(self.currentGameTime) / CGFloat(self.maxGameTime)))
+                progressionBar.updateProgress((progress))
 
             }
         }
@@ -155,7 +160,7 @@ class GameScene: SKScene {
     Game Over script
     */
     func performGameOver(){
-        print("Player looses.")
+        print("Player loses.")
         //we update the gameisover variable
         self.gameIsOver = true
         

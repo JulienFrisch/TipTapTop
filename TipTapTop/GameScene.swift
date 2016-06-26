@@ -19,7 +19,7 @@ class GameScene: SKScene {
     //GamePlay Configuration
     let maxTouchPadsActivated = 4
     let initialSwitchTime: NSTimeInterval = 5.0
-    let finalSwitchTime: NSTimeInterval = 2.0
+    let finalSwitchTime: NSTimeInterval = 1.5
     let maxGameTime: NSTimeInterval = 60 * 1
 
     
@@ -34,6 +34,10 @@ class GameScene: SKScene {
     
     //Progress bar
     let progressBarVerticalIntervalSpace: CGFloat = 10.0
+    
+    //sound effects
+    let switchSFX = SKAction.playSoundFileNamed("Switch.caf", waitForCompletion: false)
+
     
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
@@ -60,6 +64,13 @@ class GameScene: SKScene {
         for node: SKNode in self.children {
             node.removeFromParent()
         }
+        
+        //we make a small sound
+        //TO-DO: Fix restart
+        let pressStartSFX = SKAction.playSoundFileNamed("PressStart.caf", waitForCompletion: false)
+        self.runAction(pressStartSFX)
+        print("restart")
+
         
         //we load a new view
         let gameScene = GameScene(size: self.frame.size)
@@ -132,6 +143,10 @@ class GameScene: SKScene {
             randomTouchPad(activatedTouchPads).turnOff(currentTime)
             randomTouchPad(notActivatedTouchPads).turnOn(currentTime)
         }
+        
+        //we play a switch sound
+        self.runAction(self.switchSFX)
+        
     }
     
     /**

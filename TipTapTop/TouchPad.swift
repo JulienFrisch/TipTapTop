@@ -23,8 +23,16 @@ class TouchPad: SKShapeNode {
     static let radius: CGFloat = 75.0
 
     //Time variables
-    let timeLimit: NSTimeInterval = 5.0
+    let timeLimit: NSTimeInterval = 4.0
     var lastTouched: NSTimeInterval = 0.0
+    let alertTimeAllocation: Double = 0.5 //how long before the limit must the alert starts (in %)
+    
+    //Sound Effects
+    let touchSFX = SKAction.playSoundFileNamed("Touch.caf", waitForCompletion: false)
+    let alertSFX = SKAction.playSoundFileNamed("Alert.caf", waitForCompletion: false)
+    var alert_1 = false
+    var alert_2 = false
+    var alert_3 = false
     
     /**
     Create and return a touchpad at a specified location
@@ -59,14 +67,26 @@ class TouchPad: SKShapeNode {
         if !timeOut {
             //we update the touched value
             self.touched = true
+            
+            //we retrieve the Current Time
             let currentTime = event!.timestamp
             
             if self.on {
+                
                 //we re-initiate the turnOn
                 self.turnOn(currentTime)
+                
+                //we play a sound effect
+                self.runAction(self.touchSFX)
+                
+                //we reset our time alerts
+                self.resetAlert()
+                
             } else {
                 print("touching when not required")
             }
+            
+
         }
 
     }
@@ -127,13 +147,53 @@ class TouchPad: SKShapeNode {
                 return false
             } else {
                 //if we have some time left
+                //we update the color
                 self.fillColor = self.touchColor.interpolateRGBColorTo(self.warningColor, fraction: CGFloat(progress))
+                
+                //we check if we need to display an alert
+                self.displayAlert(progress)
+                
+                
                 return true
             }
 
         } else {
             //if the touchpad is off or if the touchpad is currently touched, we return true
             return true
+        }
+    }
+    
+    /**
+    Reset the alert variables to zero
+    */
+    func resetAlert(){
+        self.alert_1 = false
+        self.alert_2 = false
+        self.alert_3 = false
+    }
+    
+    /**
+    Display an alert sound depending on the progress and which alert has already been played
+     Update the alert variables accordingly
+    */
+    func displayAlert(progress: Double){
+        //alert 1
+        if !self.alert_1 && (1 - progress) < self.alertTimeAllocation {
+            print("alert 1")
+            self.runAction(alertSFX)
+            self.alert_1 = true
+        }
+        //alert 2
+        else if !self.alert_2 && (1 - progress) < self.alertTimeAllocation * (2/3) {
+            print("alert 2")
+            self.runAction(alertSFX)
+            self.alert_2 = true
+        }
+        //alert 3
+        else if !self.alert_3 && (1 - progress) < self.alertTimeAllocation * (1/3) {
+            print("alert 3")
+            self.runAction(alertSFX)
+            self.alert_3 = true
         }
     }
 

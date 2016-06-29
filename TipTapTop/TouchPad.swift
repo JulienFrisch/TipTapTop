@@ -160,8 +160,8 @@ class TouchPad: SKShapeNode {
     Compute the the % of time spent for a touchpad to be touched
     */
     func computeProgress(currentTime: NSTimeInterval)-> Double{
-        //if the touchpad is turned off, progress is 0
-        if !self.on
+        //if the touchpad is turned off, or currently touched, progress is 0
+        if !self.on || self.touched
         {
             return 0.0
         } else{

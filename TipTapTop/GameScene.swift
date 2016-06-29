@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class GameScene: SKScene {
     
@@ -42,6 +43,12 @@ class GameScene: SKScene {
     var warning_1 = false
     var warning_2 = false
     var warning_3 = false
+    
+    //music
+    var gameOverMusic = AVAudioPlayer()
+    var gameOverMusicLoaded = false
+    var gameWinMusic = AVAudioPlayer()
+    var gameWinMusicLoaded = false
 
     
     //MARK: SKScene functions
@@ -61,6 +68,10 @@ class GameScene: SKScene {
             self.addChild(touchpad)
             self.touchPads.append(touchpad)
         }
+        
+        //we prepare our musics
+        //we add our music
+        self.setupMusics()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -210,6 +221,11 @@ class GameScene: SKScene {
         //play game over animation
         gameOver.performAnimation()
         
+        //play game over music
+        if self.gameOverMusicLoaded{
+            self.gameOverMusic.play()
+        }
+        
         //get ready for restart
         self.readyForRestart = true
 
@@ -237,6 +253,11 @@ class GameScene: SKScene {
         
         //play game over animation
         gameOverNode.performAnimation()
+        
+        //play game win music
+        if self.gameWinMusicLoaded{
+            self.gameWinMusic.play()
+        }
         
         //get ready for restart
         self.readyForRestart = true
@@ -281,5 +302,48 @@ class GameScene: SKScene {
             self.runAction(warningSFX)
             self.warning_1 = true
         }
+    }
+    
+    //TO-DO: Make setupMusics more efficient
+    //TO-DO: Check wav ok format
+    func setupMusics(){
+
+        //first game over
+        //we retrieve the url of the mp3
+        let gameOverURL = NSBundle.mainBundle().URLForResource("GameOver", withExtension: "wav")
+        //unwrap our url
+        if let url = gameOverURL {
+            do{
+                //load the music
+                try self.gameOverMusic = AVAudioPlayer.init(contentsOfURL: url)
+                self.gameOverMusic.numberOfLoops = 0
+                self.gameOverMusic.prepareToPlay()
+                self.gameOverMusicLoaded = true
+            } catch {
+                print("Impossible to load \(url.absoluteString)")
+            }
+        } else {
+            print("Impossible to find the game over music.")
+        }
+        
+        //then game won
+        //we retrieve the url of the mp3
+        let gameWinURL = NSBundle.mainBundle().URLForResource("Win", withExtension: "wav")
+        //unwrap our url
+        if let url = gameWinURL {
+            do{
+                //load the music
+                try self.gameWinMusic = AVAudioPlayer.init(contentsOfURL: url)
+                self.gameWinMusic.numberOfLoops = 0
+                self.gameWinMusic.prepareToPlay()
+                self.gameWinMusicLoaded = true
+            } catch {
+                print("Impossible to load \(url.absoluteString)")
+            }
+        } else {
+            print("Impossible to find the game win music.")
+        }
+        
+        
     }
 }

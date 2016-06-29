@@ -10,6 +10,8 @@ import SpriteKit
 
 class GameOverNode: SKNode {
     
+    let textColor = UIColor.blackColor()
+    
     /**
     Create a game over SKNode at the required postion
     */
@@ -23,6 +25,7 @@ class GameOverNode: SKNode {
         gameOverLabel.name = "GameOverLabel"
         gameOverLabel.text = "Game Over"
         gameOverLabel.fontSize = 48
+        gameOverLabel.fontColor = gameOver.textColor
         gameOverLabel.position = CGPointMake(0, 0)
         gameOverLabel.horizontalAlignmentMode = .Center
         gameOverLabel.zPosition = 11
@@ -45,6 +48,7 @@ class GameOverNode: SKNode {
             let touchRestart = SKLabelNode(fontNamed: "Futura-CondensedExtraBold")
             touchRestart.text = "Touch Here To Restart"
             touchRestart.fontSize = 24
+            touchRestart.fontColor = self.textColor
             touchRestart.position = CGPointMake(gameOverLabel.position.x, gameOverLabel.position.y - 40)
             touchRestart.zPosition = 11
             self.addChild(touchRestart)

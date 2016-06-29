@@ -31,6 +31,7 @@ class GameScene: SKScene {
     //Game Status
     var gameIsOver = false
     var readyForRestart = false
+    var warning = false //define i the player is about to loose and a warning should be displayed
     
     //Progress bar
     let progressBarVerticalIntervalSpace: CGFloat = 10.0

@@ -14,7 +14,7 @@ class GameScene: SKScene {
 
     //Scene variables
     var touchPads = [TouchPad]()
-    let backColor = UIColor.cyanColor()
+    let backColor = UIColor(red: 204/255, green: 255/255, blue: 255/255, alpha: 1.0)
     
     //GamePlay Configuration
     let maxTouchPadsActivated = 4

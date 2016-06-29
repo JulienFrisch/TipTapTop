@@ -17,9 +17,9 @@ class TouchPad: SKShapeNode {
     var timeOut: Bool = false //to show if the touchPad has not been touched in time
 
     //Color and form Variables
-    let neutralColor = UIColor.grayColor()
-    let touchColor = UIColor.yellowColor()
-    let warningColor = UIColor.redColor()
+    let neutralColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+    let touchColor = UIColor(red: 255/255, green: 255/255, blue: 0.0, alpha: 1.0)
+    let warningColor = UIColor(red: 255/255, green: 0.0, blue: 0.0, alpha: 1.0)
     static let radius: CGFloat = 75.0
 
     //Time variables

@@ -79,9 +79,6 @@ class TouchPad: SKShapeNode {
                 //we play a sound effect
                 self.runAction(self.touchSFX)
                 
-                //we reset our time alerts
-                self.resetAlert()
-                
             } else {
                 print("touching when not required")
             }
@@ -140,7 +137,7 @@ class TouchPad: SKShapeNode {
         
         //if the touchpad is on but not touched and we are not over our time limit
         if self.on && !self.touched {
-            let progress = (currentTime - self.lastTouched) / self.timeLimit
+            let progress = computeProgress(currentTime)
             //if the touchpad has not been touched in time
             if progress > 1 {
                 self.timeOut = true
@@ -149,10 +146,6 @@ class TouchPad: SKShapeNode {
                 //if we have some time left
                 //we update the color
                 self.fillColor = self.touchColor.interpolateRGBColorTo(self.warningColor, fraction: CGFloat(progress))
-                
-                //we check if we need to display an alert
-                self.displayAlert(progress)
-                
                 
                 return true
             }
@@ -164,38 +157,16 @@ class TouchPad: SKShapeNode {
     }
     
     /**
-    Reset the alert variables to zero
+    Compute the the % of time spent for a touchpad to be touched
     */
-    func resetAlert(){
-        self.alert_1 = false
-        self.alert_2 = false
-        self.alert_3 = false
-    }
-    
-    /**
-    Display an alert sound depending on the progress and which alert has already been played
-     Update the alert variables accordingly
-    */
-    func displayAlert(progress: Double){
-        //alert 1
-        if !self.alert_1 && (1 - progress) < self.alertTimeAllocation {
-            print("alert 1")
-            self.runAction(alertSFX)
-            self.alert_1 = true
-        }
-        //alert 2
-        else if !self.alert_2 && (1 - progress) < self.alertTimeAllocation * (2/3) {
-            print("alert 2")
-            self.runAction(alertSFX)
-            self.alert_2 = true
-        }
-        //alert 3
-        else if !self.alert_3 && (1 - progress) < self.alertTimeAllocation * (1/3) {
-            print("alert 3")
-            self.runAction(alertSFX)
-            self.alert_3 = true
+    func computeProgress(currentTime: NSTimeInterval)-> Double{
+        //if the touchpad is turned off, progress is 0
+        if !self.on
+        {
+            return 0.0
+        } else{
+            let progress = (currentTime - self.lastTouched) / self.timeLimit
+            return progress
         }
     }
-
-
 }

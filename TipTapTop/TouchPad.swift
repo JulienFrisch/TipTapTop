@@ -17,9 +17,12 @@ class TouchPad: SKShapeNode {
     var timeOut: Bool = false //to show if the touchPad has not been touched in time
 
     //Color and form Variables
-    let neutralColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-    let touchColor = UIColor(red: 255/255, green: 255/255, blue: 0.0, alpha: 1.0)
-    let warningColor = UIColor(red: 255/255, green: 0.0, blue: 0.0, alpha: 1.0)
+    let neutralColorFill = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
+    let neutralColorStroke = UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0)
+    let touchColorFill = UIColor(red: 255/255, green: 255/255, blue: 0.0, alpha: 1.0)
+    let touchColorStroke = UIColor(red: 255/255, green: 229/255, blue: 204/255, alpha: 1.0)
+    let warningColorFill = UIColor(red: 255/255, green: 0.0, blue: 0.0, alpha: 1.0)
+    let warningColorStroke = UIColor(red: 225/255, green: 0.0, blue: 0.0, alpha: 1.0)
     static let radius: CGFloat = 75.0
 
     //Time variables
@@ -38,7 +41,8 @@ class TouchPad: SKShapeNode {
         let touchpad = TouchPad(circleOfRadius: TouchPad.radius)
         
         //we assume the touchpoint starts neutral
-        touchpad.fillColor = touchpad.neutralColor
+        touchpad.fillColor = touchpad.neutralColorFill
+        touchpad.strokeColor = touchpad.neutralColorStroke
         
         //we enable user interaction
         touchpad.userInteractionEnabled = true
@@ -108,7 +112,8 @@ class TouchPad: SKShapeNode {
         self.lastTouched = currentTime
         
         //we change the color
-        self.fillColor = self.touchColor
+        self.fillColor = self.touchColorFill
+        self.strokeColor = self.touchColorStroke
     }
     
     /**
@@ -122,7 +127,8 @@ class TouchPad: SKShapeNode {
         self.lastTouched = currentTime
         
         //we chage the color
-        self.fillColor = self.neutralColor
+        self.fillColor = self.neutralColorFill
+        self.strokeColor = self.neutralColorStroke
     }
     
     /**
@@ -141,7 +147,8 @@ class TouchPad: SKShapeNode {
             } else {
                 //if we have some time left
                 //we update the color
-                self.fillColor = self.touchColor.interpolateRGBColorTo(self.warningColor, fraction: CGFloat(progress))
+                self.fillColor = self.touchColorFill.interpolateRGBColorTo(self.warningColorFill, fraction: CGFloat(progress))
+                self.strokeColor = self.warningColorStroke
                 
                 return true
             }

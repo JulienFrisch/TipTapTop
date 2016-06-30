@@ -43,6 +43,8 @@ class GameScene: SKScene {
     var warning_1 = false
     var warning_2 = false
     var warning_3 = false
+    let pressStartSFX = SKAction.playSoundFileNamed("Touch.caf", waitForCompletion: false)
+    
     
     //music
     var gameOverMusic = AVAudioPlayer()
@@ -75,22 +77,22 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-    if (self.readyForRestart) { //we restart the game
-        //we remove all the nodes
-        for node: SKNode in self.children {
-            node.removeFromParent()
-        }
+        if (self.readyForRestart) { //we restart the game
+            //we remove all the nodes
+            for node: SKNode in self.children {
+                node.removeFromParent()
+            }
         
-        //we make a small sound
-        //TO-DO: Fix restart
-        let pressStartSFX = SKAction.playSoundFileNamed("PressStart.caf", waitForCompletion: false)
-        self.runAction(pressStartSFX)
-        print("restart")
+            //we make a small sound
+            self.runAction(self.pressStartSFX){
+                //once the sound is over, we reload the game with a new view
+                let gameScene = GameScene(size: self.frame.size)
+                self.view?.presentScene(gameScene)
+
+            }
+
 
         
-        //we load a new view
-        let gameScene = GameScene(size: self.frame.size)
-        self.view?.presentScene(gameScene)
         }
     }
 
@@ -282,7 +284,7 @@ class GameScene: SKScene {
         //warning 3
         if !self.warning_3 && (1 - progress) < self.warningTimeAllocation * (1/3) {
             print("alert 3")
-            self.runAction(warningSFX)
+            self.runAction(self.warningSFX)
             self.warning_3 = true
             self.warning_2 = true
             self.warning_1 = true
@@ -291,7 +293,7 @@ class GameScene: SKScene {
         //warning 2
         else if !self.warning_2 && (1 - progress) < self.warningTimeAllocation * (2/3) {
             print("alert 2")
-            self.runAction(warningSFX)
+            self.runAction(self.warningSFX)
             self.warning_2 = true
             self.warning_1 = true
         }
@@ -299,7 +301,7 @@ class GameScene: SKScene {
         //warning 1
         else if !self.warning_1 && (1 - progress) < self.warningTimeAllocation {
             print("alert 1")
-            self.runAction(warningSFX)
+            self.runAction(self.warningSFX)
             self.warning_1 = true
         }
     }

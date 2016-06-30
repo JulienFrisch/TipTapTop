@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3FD28FB21D2050FA004F1964 /* PressStart.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB11D2050FA004F1964 /* PressStart.caf */; };
+		3FD28FB21D2050FA004F1964 /* Touch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB11D2050FA004F1964 /* Touch.caf */; };
 		3FD28FB61D2053EC004F1964 /* Alert.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB31D2053EC004F1964 /* Alert.caf */; };
-		3FD28FB81D2053EC004F1964 /* Touch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB51D2053EC004F1964 /* Touch.caf */; };
 		3FE1690B1D1ECFAD0038A7B3 /* ProgressNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1690A1D1ECFAD0038A7B3 /* ProgressNode.swift */; };
 		3FF03A771D1DEFBB009180B2 /* GameOverNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF03A761D1DEFBB009180B2 /* GameOverNode.swift */; };
 		3FF823101D246EC400B4ECCD /* Switch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8230F1D246EC400B4ECCD /* Switch.caf */; };
@@ -27,9 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3FD28FB11D2050FA004F1964 /* PressStart.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart.caf; sourceTree = "<group>"; };
+		3FD28FB11D2050FA004F1964 /* Touch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Touch.caf; sourceTree = "<group>"; };
 		3FD28FB31D2053EC004F1964 /* Alert.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Alert.caf; sourceTree = "<group>"; };
-		3FD28FB51D2053EC004F1964 /* Touch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Touch.caf; sourceTree = "<group>"; };
 		3FE1690A1D1ECFAD0038A7B3 /* ProgressNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressNode.swift; sourceTree = "<group>"; };
 		3FF03A761D1DEFBB009180B2 /* GameOverNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverNode.swift; sourceTree = "<group>"; };
 		3FF8230F1D246EC400B4ECCD /* Switch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Switch.caf; sourceTree = "<group>"; };
@@ -64,8 +62,7 @@
 			children = (
 				3FD28FB31D2053EC004F1964 /* Alert.caf */,
 				3FF8230F1D246EC400B4ECCD /* Switch.caf */,
-				3FD28FB51D2053EC004F1964 /* Touch.caf */,
-				3FD28FB11D2050FA004F1964 /* PressStart.caf */,
+				3FD28FB11D2050FA004F1964 /* Touch.caf */,
 				3FF823131D248BB000B4ECCD /* GameOver.wav */,
 				3FF823151D248CF900B4ECCD /* Win.wav */,
 			);
@@ -172,9 +169,8 @@
 				3FF823141D248BB000B4ECCD /* GameOver.wav in Resources */,
 				3FF823101D246EC400B4ECCD /* Switch.caf in Resources */,
 				3FF8EB491D1C65840049A07F /* Assets.xcassets in Resources */,
-				3FD28FB81D2053EC004F1964 /* Touch.caf in Resources */,
 				3FD28FB61D2053EC004F1964 /* Alert.caf in Resources */,
-				3FD28FB21D2050FA004F1964 /* PressStart.caf in Resources */,
+				3FD28FB21D2050FA004F1964 /* Touch.caf in Resources */,
 				3FF8EB471D1C65840049A07F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

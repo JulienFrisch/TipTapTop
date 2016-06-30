@@ -29,10 +29,6 @@ class TouchPad: SKShapeNode {
     
     //Sound Effects
     let touchSFX = SKAction.playSoundFileNamed("Touch.caf", waitForCompletion: false)
-    let alertSFX = SKAction.playSoundFileNamed("Alert.caf", waitForCompletion: false)
-    var alert_1 = false
-    var alert_2 = false
-    var alert_3 = false
     
     /**
     Create and return a touchpad at a specified location

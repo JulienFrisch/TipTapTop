@@ -10,6 +10,7 @@ import SpriteKit
 
 class TouchPad: SKShapeNode {
     //TO-DO: Create a property of class file to store those values
+    //TO-DO: when figger is slidding to the touchpad, it should behave like atouchbegans
 
     //MARK: Status Variables
     var on: Bool = false //to show if the touchpad is activated
@@ -65,6 +66,7 @@ class TouchPad: SKShapeNode {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //if we are over our time limit, we disable all actions
         if !timeOut {
+            
             //we update the touched value
             self.touched = true
             
@@ -79,6 +81,8 @@ class TouchPad: SKShapeNode {
                 //we play a sound effect
                 self.runAction(self.touchSFX)
                 
+               //we reset the
+                
             } else {
                 print("touching when not required")
             }
@@ -92,12 +96,40 @@ class TouchPad: SKShapeNode {
     If the touchpad is no longer touched, a set of actions are launched
     */
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //we update the touched value
-        self.touched = false
+        //if the value touched is already false (in case of touch moved), we do nothing
+        if self.touched{
+            //we update the touched value
+            self.touched = false
         
-        //we update the lastTouched variable
-        self.lastTouched = event!.timestamp
+            //we update the lastTouched variable
+            self.lastTouched = event!.timestamp
+        }
     }
+    
+    /**
+    if the finger slip and we are not touching the pad anymore, we must update it accordingly
+    */
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        //at least one touch must be within the pad perimeter
+        var touchPadTouched = false
+        for touch in touches {
+            //we retrieve the touch latest location
+            let touchPoint: CGPoint = touch.locationInNode(self)
+            //we check if it is still within the touchpad boundaryes
+            //note: the anchor point of the node is centered
+            if fabs(touchPoint.x) < (self.frame.size.width / 2) && fabs(touchPoint.y) < (self.frame.size.height / 2) {
+                touchPadTouched = true
+            }
+        }
+        //if at least on touce touches the touchpad
+        if touchPadTouched{
+            self.touchesBegan(touches, withEvent: event)
+        } else {
+            self.touched  = false
+        }
+        
+    }
+    
     
 
     //MARK: Actions
@@ -122,9 +154,6 @@ class TouchPad: SKShapeNode {
     func turnOff(currentTime: CFTimeInterval){
         //we change the off variable
         self.on = false
-        
-        //we update the lastTouched Variable
-        self.lastTouched = currentTime
         
         //we chage the color
         self.fillColor = self.neutralColorFill

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Default</key>
+	<dict>
+		<key>Colors</key>
+		<dict>
+			<key>BackGround</key>
+			<dict>
+				<key>Red</key>
+				<integer>225</integer>
+				<key>Blue</key>
+				<integer>255</integer>
+				<key>Green</key>
+				<integer>255</integer>
+				<key>Alpha</key>
+				<integer>1</integer>
+			</dict>
+		</dict>
+		<key>GamePlay</key>
+		<dict>
+			<key>maxTouchPadsActivated</key>
+			<integer>4</integer>
+			<key>initialSwitchTime</key>
+			<real>5</real>
+			<key>finalSwitchTime</key>
+			<real>1.5</real>
+			<key>maxGameTime</key>
+			<integer>60</integer>
+			<key>warningTimeAllocation</key>
+			<real>0.3</real>
+		</dict>
+		<key>Music</key>
+		<dict>
+			<key>Win</key>
+			<string>Win.wav</string>
+			<key>GameOver</key>
+			<string>GameOver.wav</string>
+		</dict>
+		<key>Sounds</key>
+		<dict>
+			<key>Alert</key>
+			<string>Alert.caf</string>
+			<key>Switch</key>
+			<string>Switch.caf</string>
+			<key>Touch</key>
+			<string>Touch.caf</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

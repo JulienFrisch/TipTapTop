@@ -10,13 +10,28 @@ import SpriteKit
 import AVFoundation
 
 class GameScene: SKScene {
-    
-    //TO-D: put variables values in a class or properties file
-
-    //Scene variables
+    //MARK: Scene variables
     var touchPads = [TouchPad]()
+    //Time variables
+    var lastUpdateTimeInterval:NSTimeInterval = 0.0
+    var timeSinceLastSwitch: NSTimeInterval = 0.0
+    var currentGameTime: NSTimeInterval = 0.0
+    //Game Status
+    var gameIsOver = false
+    var readyForRestart = false
+    var warning = false //define i the player is about to loose and a warning should be displayed
+    var warning_1 = false
+    var warning_2 = false
+    var warning_3 = false
+    //music
+    var gameOverMusic = AVAudioPlayer()
+    var gameOverMusicLoaded = false
+    var gameWinMusic = AVAudioPlayer()
+    var gameWinMusicLoaded = false
+    
+    //MARK: Configuration
+    //Colors
     let backColor = UIColor(red: 225/255, green: 255/255, blue: 255/255, alpha: 1.0)
-    //let backColor = UIColor(red: 255/255, green: 243/255, blue: 122/255, alpha: 1.0)
     
     //GamePlay Configuration
     let maxTouchPadsActivated = 4
@@ -25,34 +40,15 @@ class GameScene: SKScene {
     let maxGameTime: NSTimeInterval = 60 * 1
     let warningTimeAllocation: Double = 0.3 //how long before the limit must the alert starts (in %)
     
-    //Time tracking variables
-    var lastUpdateTimeInterval:NSTimeInterval = 0.0
-    var timeSinceLastSwitch: NSTimeInterval = 0.0
-    var currentGameTime: NSTimeInterval = 0.0
-    
-    //Game Status
-    var gameIsOver = false
-    var readyForRestart = false
-    var warning = false //define i the player is about to loose and a warning should be displayed
-    
     //Progress bar
+    //TO-DO: add progress bar to plist
     let progressBarVerticalIntervalSpace: CGFloat = 10.0
     
     //sound effects
     let switchSFX = SKAction.playSoundFileNamed("Switch.caf", waitForCompletion: false)
     let warningSFX = SKAction.playSoundFileNamed("Alert.caf", waitForCompletion: false)
-    var warning_1 = false
-    var warning_2 = false
-    var warning_3 = false
     let pressStartSFX = SKAction.playSoundFileNamed("Touch.caf", waitForCompletion: false)
     
-    
-    //music
-    var gameOverMusic = AVAudioPlayer()
-    var gameOverMusicLoaded = false
-    var gameWinMusic = AVAudioPlayer()
-    var gameWinMusicLoaded = false
-
     
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {

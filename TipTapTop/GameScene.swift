@@ -9,6 +9,7 @@
 import SpriteKit
 import AVFoundation
 
+//TO-DO: Initializer GameScene
 class GameScene: SKScene {
     //MARK: Scene variables
     var touchPads = [TouchPad]()
@@ -30,11 +31,12 @@ class GameScene: SKScene {
     var gameWinMusicLoaded = false
     
     //MARK: Configuration
+    //
     //Colors
     let backColor = UIColor(red: 225/255, green: 255/255, blue: 255/255, alpha: 1.0)
     
     //GamePlay Configuration
-    let maxTouchPadsActivated = 4
+    var maxTouchPadsActivated = 4
     let initialSwitchTime: NSTimeInterval = 5.0
     let finalSwitchTime: NSTimeInterval = 1.5
     let maxGameTime: NSTimeInterval = 60 * 1
@@ -52,6 +54,18 @@ class GameScene: SKScene {
     
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
+        
+        
+        //TO-DO: move below into initializer
+        do{
+            let configurationsDictionary = try PListConverter.dictionaryFromFile("LevelConfiguration", ofType: "plist")
+            self.maxTouchPadsActivated = configurationsDictionary["test"] as! Int
+        } catch let error {
+            //fail the application completely         }
+        
+        
+        
+        
         //we define the scene color
         self.backgroundColor = self.backColor
         

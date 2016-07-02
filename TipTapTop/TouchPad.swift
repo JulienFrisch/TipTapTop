@@ -123,7 +123,13 @@ class TouchPad: SKShapeNode {
         }
         //if at least on touce touches the touchpad
         if touchPadTouched{
-            self.touchesBegan(touches, withEvent: event)
+            //we retrieve the Current Time
+            self.lastTouched = event!.timestamp
+            
+            //if previously the touchpad was not touched
+            if !self.touched {
+                self.touchesBegan(touches, withEvent: event)
+            }
         } else {
             self.touched  = false
         }

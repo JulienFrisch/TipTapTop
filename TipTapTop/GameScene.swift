@@ -19,8 +19,8 @@ class GameScene: SKScene {
     //let backColor = UIColor(red: 255/255, green: 243/255, blue: 122/255, alpha: 1.0)
     
     //GamePlay Configuration
-    let maxTouchPadsActivated = 2
-    let initialSwitchTime: NSTimeInterval = 10.0
+    let maxTouchPadsActivated = 4
+    let initialSwitchTime: NSTimeInterval = 5.0
     let finalSwitchTime: NSTimeInterval = 1.5
     let maxGameTime: NSTimeInterval = 60 * 1
     let warningTimeAllocation: Double = 0.3 //how long before the limit must the alert starts (in %)

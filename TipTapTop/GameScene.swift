@@ -31,16 +31,15 @@ class GameScene: SKScene {
     var gameWinMusicLoaded = false
     
     //MARK: Configuration
-    //
     //Colors
     let backColor = UIColor(red: 225/255, green: 255/255, blue: 255/255, alpha: 1.0)
     
     //GamePlay Configuration
     var maxTouchPadsActivated = 4
-    let initialSwitchTime: NSTimeInterval = 5.0
-    let finalSwitchTime: NSTimeInterval = 1.5
-    let maxGameTime: NSTimeInterval = 60 * 1
-    let warningTimeAllocation: Double = 0.3 //how long before the limit must the alert starts (in %)
+    var initialSwitchTime: NSTimeInterval = 5.0
+    var finalSwitchTime: NSTimeInterval = 1.5
+    var maxGameTime: NSTimeInterval = 60 * 1
+    var warningTimeAllocation: Double = 0.3 //how long before the limit must the alert starts (in %)
     
     //Progress bar
     //TO-DO: add progress bar to plist
@@ -54,17 +53,6 @@ class GameScene: SKScene {
     
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
-        
-        
-        //TO-DO: move below into initializer
-        do{
-            let configurationsDictionary = try PListConverter.dictionaryFromFile("LevelConfiguration", ofType: "plist")
-            self.maxTouchPadsActivated = configurationsDictionary["test"] as! Int
-        } catch let error {
-            //fail the application completely         }
-        
-        
-        
         
         //we define the scene color
         self.backgroundColor = self.backColor
@@ -101,9 +89,6 @@ class GameScene: SKScene {
                 self.view?.presentScene(gameScene)
 
             }
-
-
-        
         }
     }
 
@@ -356,7 +341,22 @@ class GameScene: SKScene {
         } else {
             print("Impossible to find the game win music.")
         }
-        
-        
+    }
+    
+    func loadSettings(levelName: String){
+        //we load our configurations
+        do {
+            let levelConfig = try LevelConfigurations(levelName: "Default")
+            //we unwrap and use gameplay settings
+            if let gameplay = levelConfig.gameplay{
+                self.maxTouchPadsActivated = gameplay.maxTouchPadsActivated
+                self.initialSwitchTime = gameplay.initialSwitchTime
+                self.finalSwitchTime = gameplay.finalSwitchTime
+                self.maxGameTime = gameplay.maxGameTime
+                self.warningTimeAllocation = gameplay.warningTimeAllocation
+            }
+        } catch {
+            print("error")
+        }
     }
 }

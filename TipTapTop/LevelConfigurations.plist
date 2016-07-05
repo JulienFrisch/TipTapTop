@@ -21,7 +21,7 @@
 		<key>GamePlay</key>
 		<dict>
 			<key>maxTouchPadsActivated</key>
-			<integer>4</integer>
+			<integer>2</integer>
 			<key>initialSwitchTime</key>
 			<real>5</real>
 			<key>finalSwitchTime</key>
@@ -31,12 +31,12 @@
 			<key>warningTimeAllocation</key>
 			<real>0.3</real>
 		</dict>
-		<key>Music</key>
+		<key>Musics</key>
 		<dict>
 			<key>Win</key>
-			<string>Win.wav</string>
+			<string>Win</string>
 			<key>GameOver</key>
-			<string>GameOver.wav</string>
+			<string>GameOver</string>
 		</dict>
 		<key>Sounds</key>
 		<dict>

@@ -19,6 +19,11 @@ enum ConfigurationError: ErrorType{
     case InvalidResource
     case ConversionError
     case InvalidKey
+    case LevelError
+    case GamePlayError
+    case MusicsError
+    case SFXError
+    case ColorsError
 }
 /**
  Class used to retrieve the data from a plist
@@ -60,101 +65,112 @@ struct GamePlay {
     }
 }
 
+struct Colors {
+    let backGroundColor: UIColor
+    
+    init(backGroundColor: UIColor){
+        self.backGroundColor = backGroundColor
+    }
+}
+
+struct Musics {
+    let win: String
+    let gameOver: String
+    
+    init(win: String, gameOver: String){
+        self.win = win
+        self.gameOver = gameOver
+    }
+}
+
+struct Sounds {
+    let switchSFX: String
+    let alertSFX : String
+    let touchSFX: String
+    
+    init(switchSFX: String, alertSFX: String, touchSFX: String){
+        self.switchSFX = switchSFX
+        self.alertSFX = alertSFX
+        self.touchSFX = touchSFX
+    }
+}
+
 //TO-DO: Add throwables instead of prints
 //TO-DO: Create some sub-struct
 struct LevelConfigurations{
     //GamePlay
-//    var maxTouchPadsActivated: Int?
-//    var initialSwitchTime: NSTimeInterval?
-//    var finalSwitchTime: NSTimeInterval?
-//    var maxGameTime: NSTimeInterval?
-//    var warningTimeAllocation: Double?
-    
     var gameplay: GamePlay?
     
     //Colors
-    var backGroundColor: UIColor?
+    var colors: Colors?
     
     //Musics
-    var win: String?
-    var gameOver: String?
+    var musics: Musics?
     
     //sound effects
-    var switchSFX: String?
-    var alertSFX : String?
-    var touchSFX: String?
-    
+    var sounds: Sounds?
     
     init(levelName: String) throws {
-        do{
-            //we retrieve the level configurations file
-            let configDict = try PListConverter.dictionaryFromFile("LevelConfigurations", ofType: "plist")
+        //we retrieve the level configurations file
+        let configDict = try PListConverter.dictionaryFromFile("LevelConfigurations", ofType: "plist")
             
-            //we load the dictionnary for the required level
-            if let currentLevelConfig: NSDictionary = configDict.valueForKey(levelName) as? NSDictionary{
-                
-                //we load the gamePlay
-                if let gamePlay: NSDictionary = currentLevelConfig.valueForKey("GamePlay") as? NSDictionary,
-                    let maxTouch = gamePlay.valueForKey("maxTouchPadsActivated") as? Int,
-                    let initialSwitchTime = gamePlay.valueForKey("initialSwitchTime") as? NSTimeInterval,
-                    let finalSwitchTime = gamePlay.valueForKey("finalSwitchTime") as? NSTimeInterval,
-                    let maxGameTime = gamePlay.valueForKey("maxGameTime") as? NSTimeInterval,
-                    let warningTimeAllocation = gamePlay.valueForKey("warningTimeAllocation") as? Double
-                {
-//                    self.maxTouchPadsActivated = maxTouch
-//                    self.initialSwitchTime = initialSwitchTime
-//                    self.finalSwitchTime = finalSwitchTime
-//                    self.maxGameTime = maxGameTime
-//                    self.warningTimeAllocation = warningTimeAllocation
-                    self.gameplay = GamePlay(maxTouchPadsActivated: maxTouch, initialSwitchTime: initialSwitchTime, finalSwitchTime: finalSwitchTime, maxGameTime: maxGameTime, warningTimeAllocation: warningTimeAllocation)
-                } else {
-                    print("Incomplete GamePlay settings for:\(levelName)")
-                }
-                
-                //we load the colors
-                if let colors: NSDictionary = currentLevelConfig.valueForKey("Colors") as? NSDictionary,
-                    let background = colors.valueForKey("BackGround") as? NSDictionary,
-                    let backgroundRed = background.valueForKey("Red") as? CGFloat,
-                    let backgroundBlue = background.valueForKey("Blue") as? CGFloat,
-                    let backgroundGreen = background.valueForKey("Green") as? CGFloat,
-                    let backgroundAlpha = background.valueForKey("Alpha") as? CGFloat
-                {
-                    self.backGroundColor = UIColor(red: backgroundRed / 255, green: backgroundBlue / 255, blue: backgroundGreen / 255, alpha: backgroundAlpha)
-                } else {
-                    print("Incomplete Colors settings for:\(levelName)")
-                }
-                
-                //we load the musics
-                if let musics: NSDictionary = currentLevelConfig.valueForKey("Musics") as? NSDictionary,
-                    let win = musics.valueForKey("Win") as? String,
-                    let gameOver = musics.valueForKey("GameOver") as? String
-                {
-                    self.win = win
-                    self.gameOver = gameOver
-                } else {
-                    print("Incomplete music definition for:\(levelName)")
-                }
-                
-                //we load the sounds
-                if let sounds: NSDictionary = currentLevelConfig.valueForKey("Sounds") as? NSDictionary,
-                    let alertSFX = sounds.valueForKey("Alert") as? String,
-                    let switchSFX = sounds.valueForKey("Switch") as? String,
-                    let touchSFX = sounds.valueForKey("Touch") as? String
-                {
-                    self.alertSFX = alertSFX
-                    self.switchSFX = switchSFX
-                    self.touchSFX = touchSFX
-                } else {
-                    print("Incomplete sounds definition for:\(levelName)")
-                }
-                
-                
+        //we load the dictionnary for the required level
+        if let currentLevelConfig: NSDictionary = configDict.valueForKey(levelName) as? NSDictionary{
+            
+            //we load the gamePlay
+            if let gamePlay: NSDictionary = currentLevelConfig.valueForKey("GamePlay") as? NSDictionary,
+                let maxTouch = gamePlay.valueForKey("maxTouchPadsActivated") as? Int,
+                let initialSwitchTime = gamePlay.valueForKey("initialSwitchTime") as? NSTimeInterval,
+                let finalSwitchTime = gamePlay.valueForKey("finalSwitchTime") as? NSTimeInterval,
+                let maxGameTime = gamePlay.valueForKey("maxGameTime") as? NSTimeInterval,
+                let warningTimeAllocation = gamePlay.valueForKey("warningTimeAllocation") as? Double
+            {
+                self.gameplay = GamePlay(maxTouchPadsActivated: maxTouch, initialSwitchTime: initialSwitchTime, finalSwitchTime: finalSwitchTime, maxGameTime: maxGameTime, warningTimeAllocation: warningTimeAllocation)
             } else {
-                print("Not able to load the settings for: \(levelName)")
+                print("Incomplete GamePlay settings for:\(levelName)")
+                throw(ConfigurationError.GamePlayError)
             }
-            
-        }catch {
-            fatalError("bouh")
+                
+            //we load the colors
+            if let colors: NSDictionary = currentLevelConfig.valueForKey("Colors") as? NSDictionary,
+                let background = colors.valueForKey("BackGround") as? NSDictionary,
+                let backgroundRed = background.valueForKey("Red") as? CGFloat,
+                let backgroundBlue = background.valueForKey("Blue") as? CGFloat,
+                let backgroundGreen = background.valueForKey("Green") as? CGFloat,
+                let backgroundAlpha = background.valueForKey("Alpha") as? CGFloat
+            {
+                self.colors = Colors(backGroundColor: UIColor(red: backgroundRed / 255, green: backgroundBlue / 255, blue: backgroundGreen / 255, alpha: backgroundAlpha))
+            } else {
+                print("Incomplete Colors settings for:\(levelName)")
+                throw(ConfigurationError.ColorsError)
+            }
+                
+            //we load the musics
+            if let musics: NSDictionary = currentLevelConfig.valueForKey("Musics") as? NSDictionary,
+                let win = musics.valueForKey("Win") as? String,
+                let gameOver = musics.valueForKey("GameOver") as? String
+            {
+                self.musics = Musics(win: win, gameOver: gameOver)
+            } else {
+                print("Incomplete music definition for:\(levelName)")
+                throw(ConfigurationError.MusicsError)
+            }
+                
+            //we load the sounds
+            if let sounds: NSDictionary = currentLevelConfig.valueForKey("Sounds") as? NSDictionary,
+                let alertSFX = sounds.valueForKey("Alert") as? String,
+                let switchSFX = sounds.valueForKey("Switch") as? String,
+                let touchSFX = sounds.valueForKey("Touch") as? String
+            {
+                self.sounds = Sounds(switchSFX: alertSFX, alertSFX: switchSFX, touchSFX: touchSFX)
+            } else {
+                print("Incomplete sounds definition for:\(levelName)")
+                throw(ConfigurationError.SFXError)
+            }
+                
+        } else {
+            print("Not able to load the settings for: \(levelName)")
+            throw(ConfigurationError.LevelError)
         }
     }
 }

@@ -9,10 +9,10 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, ViewControllerDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
 
         if let scene = GameScene(fileNamed:"GameScene") {
             // Configure the view.
@@ -29,6 +29,9 @@ class GameViewController: UIViewController {
             /* Limit the size of the scene accordingly */
             scene.size = skView.bounds.size
             
+            /* we make sure we pass the current view controller*/
+            scene.viewController = self
+
             skView.presentScene(scene)
         }
     }
@@ -53,4 +56,31 @@ class GameViewController: UIViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    //TO-DO: Create a return to menu button
+    /**
+     Show a configuration issue and return to main menu
+     */
+    func showAlert(title: String, message: String? = nil, style: UIAlertControllerStyle = UIAlertControllerStyle.Alert){
+        
+        //we create the alert window
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        
+        //we create the OK action
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(okAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+}
+
+/**
+ Delegate method to send eror messages
+ */
+protocol ViewControllerDelegate
+{
+    /**
+    Send an error window
+    */
+    func showAlert(itle: String, message: String?, style: UIAlertControllerStyle );
 }

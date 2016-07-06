@@ -30,49 +30,73 @@ class GameScene: SKScene {
     var gameWinMusic = AVAudioPlayer()
     var gameWinMusicLoaded = false
     
+    //MARK: View Controller
+    var viewController: ViewControllerDelegate?
+    
     //MARK: Configuration
+    let levelName = "Default"
     //Colors
-    let backColor = UIColor(red: 225/255, green: 255/255, blue: 255/255, alpha: 1.0)
+    var colors: Colors?
     
     //GamePlay Configuration
-    var maxTouchPadsActivated = 4
-    var initialSwitchTime: NSTimeInterval = 5.0
-    var finalSwitchTime: NSTimeInterval = 1.5
-    var maxGameTime: NSTimeInterval = 60 * 1
-    var warningTimeAllocation: Double = 0.3 //how long before the limit must the alert starts (in %)
+    var gameplay: GamePlay?
     
     //Progress bar
     //TO-DO: add progress bar to plist
     let progressBarVerticalIntervalSpace: CGFloat = 10.0
     
     //sound effects
-    let switchSFX = SKAction.playSoundFileNamed("Switch.caf", waitForCompletion: false)
-    let warningSFX = SKAction.playSoundFileNamed("Alert.caf", waitForCompletion: false)
-    let pressStartSFX = SKAction.playSoundFileNamed("Touch.caf", waitForCompletion: false)
+    var sounds: Sounds?
+    var switchSFX: SKAction?
+    var warningSFX: SKAction?
+    var touchSFX: SKAction?
     
     
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
-        
-        //we define the scene color
-        self.backgroundColor = self.backColor
-        
-        //we add the progress bar
-        let progressBar = ProgressNode.progressAtPosition(CGPointMake(0, self.frame.size.height - self.progressBarVerticalIntervalSpace), inFrame: self.frame) as ProgressNode
-        self.addChild(progressBar)
-        
-        //we place 8 touchpoints, and add them to the touchpoints variable
-        for i in 0...7 {
-            let x = (self.frame.size.width / 4) * CGFloat(1 + (i % 2) * 2)
-            let y = ((self.frame.size.height - progressBar.height - 2 * self.progressBarVerticalIntervalSpace) / 8) * CGFloat(1 + i - i % 2)
-            let touchpad = TouchPad.createAtPosition(CGPointMake(x, y))
-            self.addChild(touchpad)
-            self.touchPads.append(touchpad)
+        do{
+            //we load the settings in our variables
+            try self.loadSettings(self.levelName)
+            
+            //we define the scene color
+            self.backgroundColor = self.colors!.backGroundColor
+            
+            //we add the progress bar
+            let progressBar = ProgressNode.progressAtPosition(CGPointMake(0, self.frame.size.height - self.progressBarVerticalIntervalSpace), inFrame: self.frame) as ProgressNode
+            self.addChild(progressBar)
+            
+            //we place 8 touchpoints, and add them to the touchpoints variable
+            for i in 0...7 {
+                let x = (self.frame.size.width / 4) * CGFloat(1 + (i % 2) * 2)
+                let y = ((self.frame.size.height - progressBar.height - 2 * self.progressBarVerticalIntervalSpace) / 8) * CGFloat(1 + i - i % 2)
+                let touchpad = TouchPad.createAtPosition(CGPointMake(x, y))
+                self.addChild(touchpad)
+                self.touchPads.append(touchpad)
+            }
+            
+            //we prepare our musics
+            //we add our music
+            self.setupMusics()
+        } catch ConfigurationError.LevelError {
+            self.paused = true
+            self.showAlert("Level Error", message: "Could not load configurations of the level:\(self.levelName)")
+        } catch ConfigurationError.ColorsError {
+            self.paused = true
+            self.showAlert("Level Error", message: "Could not load the colors of the level:\(self.levelName)")
+        } catch ConfigurationError.GamePlayError {
+            self.paused = true
+            self.showAlert("Level Error", message: "Could not load the GamePlay of the level:\(self.levelName)")
+        } catch ConfigurationError.SFXError {
+            self.paused = true
+            self.showAlert("Level Error", message: "Could not load the sound effects of the level :\(self.levelName)")
+        } catch ConfigurationError.MusicsError {
+            self.paused = true
+            self.showAlert("Level Error", message: "Could not load the music of the level :\(self.levelName)")
+        } catch let error {
+            self.paused = true
+            print(error)
+            self.showAlert("Level Error", message: "\(error)")
         }
-        
-        //we prepare our musics
-        //we add our music
-        self.setupMusics()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -83,7 +107,7 @@ class GameScene: SKScene {
             }
         
             //we make a small sound
-            self.runAction(self.pressStartSFX){
+            self.runAction(self.touchSFX!){
                 //once the sound is over, we reload the game with a new view
                 let gameScene = GameScene(size: self.frame.size)
                 self.view?.presentScene(gameScene)
@@ -97,7 +121,7 @@ class GameScene: SKScene {
         if !gameIsOver
         {
             //if the required game time is reached, the player wins
-            if self.currentGameTime >= self.maxGameTime {
+            if self.currentGameTime >= self.gameplay!.maxGameTime {
                 self.performWin()
             } else{
                 
@@ -115,7 +139,7 @@ class GameScene: SKScene {
                         self.performGameOver()
                     }
                     //if any touchpad is in warning zone, we change the warning variable of the GameScene
-                    if touchpad.computeProgress(currentTime) > (1 - self.warningTimeAllocation) {
+                    if touchpad.computeProgress(currentTime) > (1 - self.gameplay!.warningTimeAllocation) {
                         self.warning = true
                         progressOldestTouchPad = max(touchpad.computeProgress(currentTime),progressOldestTouchPad)
                     }
@@ -129,13 +153,13 @@ class GameScene: SKScene {
                 self.lastUpdateTimeInterval = currentTime
                 
                 //we compute the progress of the game and the associated switch time
-                let progress: CGFloat = CGFloat(self.currentGameTime) / CGFloat(self.maxGameTime)
-                let currentSwitchTime: NSTimeInterval = self.initialSwitchTime * (1 - Double(progress)) + self.finalSwitchTime * Double(progress)
+                let progress: CGFloat = CGFloat(self.currentGameTime) / CGFloat(self.gameplay!.maxGameTime)
+                let currentSwitchTime: NSTimeInterval = self.gameplay!.initialSwitchTime * (1 - Double(progress)) + self.gameplay!.finalSwitchTime * Double(progress)
                 
                 //we check if it is time to make a switch
                 if (self.timeSinceLastSwitch > currentSwitchTime) {
                     //we run our random sequnce
-                    runRandomSwitch(self.touchPads, maxTouchPadsActivated: self.maxTouchPadsActivated, currentTime: currentTime)
+                    runRandomSwitch(self.touchPads, maxTouchPadsActivated: self.gameplay!.maxTouchPadsActivated, currentTime: currentTime)
                     
                     //we update the time since we performed a switch
                     self.timeSinceLastSwitch = 0
@@ -178,7 +202,7 @@ class GameScene: SKScene {
         }
         
         //we play a switch sound
-        self.runAction(self.switchSFX)
+        self.runAction(self.switchSFX!)
         
     }
     
@@ -278,26 +302,26 @@ class GameScene: SKScene {
         
         //we start by warning 3 so we do not replay already used warnings
         //warning 3
-        if !self.warning_3 && (1 - progress) < self.warningTimeAllocation * (1/3) {
+        if !self.warning_3 && (1 - progress) < self.gameplay!.warningTimeAllocation * (1/3) {
             print("alert 3")
-            self.runAction(self.warningSFX)
+            self.runAction(self.warningSFX!)
             self.warning_3 = true
             self.warning_2 = true
             self.warning_1 = true
         }
         
         //warning 2
-        else if !self.warning_2 && (1 - progress) < self.warningTimeAllocation * (2/3) {
+        else if !self.warning_2 && (1 - progress) < self.gameplay!.warningTimeAllocation * (2/3) {
             print("alert 2")
-            self.runAction(self.warningSFX)
+            self.runAction(self.warningSFX!)
             self.warning_2 = true
             self.warning_1 = true
         }
         
         //warning 1
-        else if !self.warning_1 && (1 - progress) < self.warningTimeAllocation {
+        else if !self.warning_1 && (1 - progress) < self.gameplay!.warningTimeAllocation {
             print("alert 1")
-            self.runAction(self.warningSFX)
+            self.runAction(self.warningSFX!)
             self.warning_1 = true
         }
     }
@@ -343,20 +367,36 @@ class GameScene: SKScene {
         }
     }
     
-    func loadSettings(levelName: String){
-        //we load our configurations
-        do {
-            let levelConfig = try LevelConfigurations(levelName: "Default")
-            //we unwrap and use gameplay settings
-            if let gameplay = levelConfig.gameplay{
-                self.maxTouchPadsActivated = gameplay.maxTouchPadsActivated
-                self.initialSwitchTime = gameplay.initialSwitchTime
-                self.finalSwitchTime = gameplay.finalSwitchTime
-                self.maxGameTime = gameplay.maxGameTime
-                self.warningTimeAllocation = gameplay.warningTimeAllocation
-            }
-        } catch {
-            print("error")
+    /**
+    Load a level settings into the class variables
+    In case of incomplete configurations, throws a dedidacted error
+    */
+    func loadSettings(levelName: String) throws {
+        let levelConfig = try LevelConfigurations(levelName: "Default")
+        //we unwrap and use gameplay settings
+        if let gameplay = levelConfig.gameplay{
+            self.gameplay = gameplay
+        }
+            
+        if let sounds = levelConfig.sounds{
+            self.sounds = sounds
+            self.switchSFX = SKAction.playSoundFileNamed(self.sounds!.switchSFX, waitForCompletion: false)
+            self.warningSFX = SKAction.playSoundFileNamed(self.sounds!.alertSFX, waitForCompletion: false)
+            self.touchSFX = SKAction.playSoundFileNamed(self.sounds!.touchSFX, waitForCompletion: false)
+        }
+            
+        if let colors = levelConfig.colors{
+            self.colors = colors
         }
     }
+    
+    //TO-DO: Create a return to menu button
+    /**
+    Show a configuration issue and return to main menu
+    */
+    func showAlert(title: String, message: String? = nil, style: UIAlertControllerStyle = UIAlertControllerStyle.Alert){
+        //by default: modal view
+        self.viewController?.showAlert(title, message: message, style: style)
+    }
+    
 }

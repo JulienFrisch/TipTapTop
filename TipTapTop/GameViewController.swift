@@ -10,6 +10,13 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController, ViewControllerDelegate {
+    
+    override func loadView() {
+        super.loadView()
+        //we make sure the view is some type SKView for the later function viewDidAppear
+        self.view = SKView()
+
+    }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

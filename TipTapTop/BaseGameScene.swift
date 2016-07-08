@@ -111,10 +111,9 @@ class BaseGameScene: SKScene {
         
             //we make a small sound
             self.runAction(self.touchSFX!){
-                //once the sound is over, we reload the game with a new view
-                let gameScene = BaseGameScene(size: self.frame.size)
-                self.view?.presentScene(gameScene)
-
+                //we return to our level menu
+                let lvlViewController = LevelsViewController()
+                self.viewController?.retrieveNavigationController().pushViewController(lvlViewController, animated: false)
             }
         }
     }

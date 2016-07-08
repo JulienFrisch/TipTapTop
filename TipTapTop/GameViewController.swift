@@ -89,10 +89,20 @@ class GameViewController: UIViewController, ViewControllerDelegate {
         
         self.presentViewController(alertController, animated: true, completion: nil)
     }
+
+
+    /**
+     retrieve the Navigation View Controller
+    */
+    func retrieveNavigationController() -> UINavigationController {
+        //we can force unwrap it because we know a navigation view controller exists
+        return self.navigationController!
+    }
+    
 }
 
 /**
- Delegate method to send eror messages
+ Delegate methods so the SKScene can use the view
  */
 protocol ViewControllerDelegate
 {
@@ -100,4 +110,9 @@ protocol ViewControllerDelegate
     Send an error window
     */
     func showAlert(itle: String, message: String?, style: UIAlertControllerStyle );
+    
+    /**
+    retrieve the Navigation Controller
+    */
+    func retrieveNavigationController() -> UINavigationController;
 }

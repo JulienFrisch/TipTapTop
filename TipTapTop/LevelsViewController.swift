@@ -11,6 +11,7 @@ import UIKit
 class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tableView: UITableView!
+    let levels: [String] = ["Level_1","Level_2"]
     
     //MARK: UIViewController methods
     
@@ -47,7 +48,7 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.accessoryType = .DisclosureIndicator
-        cell.textLabel?.attributedText = self.makeAttributedString(title: "yuhou", subtitle: "")
+        cell.textLabel?.attributedText = self.makeAttributedString(title: self.levels[indexPath.row], subtitle: "")
         cell.textLabel?.numberOfLines = 0
         return cell
     }
@@ -57,7 +58,7 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.levels.count
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -70,6 +71,8 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let gameViewController = GameViewController()
+        //we make sure we load the required level
+        gameViewController.level = self.levels[indexPath.row]
         self.navigationController?.pushViewController(gameViewController, animated: true)
     }
     

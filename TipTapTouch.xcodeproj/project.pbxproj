@@ -13,13 +13,15 @@
 		3FD28FB21D2050FA004F1964 /* Touch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB11D2050FA004F1964 /* Touch.caf */; };
 		3FD28FB61D2053EC004F1964 /* Alert.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB31D2053EC004F1964 /* Alert.caf */; };
 		3FE1690B1D1ECFAD0038A7B3 /* ProgressNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1690A1D1ECFAD0038A7B3 /* ProgressNode.swift */; };
+		3FE49FCD1D2F259C00ABAFA4 /* Level_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE49FCC1D2F259C00ABAFA4 /* Level_1.swift */; };
+		3FE49FCF1D2F27E800ABAFA4 /* Level_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE49FCE1D2F27E800ABAFA4 /* Level_2.swift */; };
 		3FF03A771D1DEFBB009180B2 /* GameOverNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF03A761D1DEFBB009180B2 /* GameOverNode.swift */; };
 		3FF823101D246EC400B4ECCD /* Switch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8230F1D246EC400B4ECCD /* Switch.caf */; };
 		3FF823141D248BB000B4ECCD /* GameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FF823131D248BB000B4ECCD /* GameOver.wav */; };
 		3FF823161D248CF900B4ECCD /* Win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FF823151D248CF900B4ECCD /* Win.wav */; };
 		3FF8EB3E1D1C65840049A07F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8EB3D1D1C65840049A07F /* AppDelegate.swift */; };
 		3FF8EB401D1C65840049A07F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8EB3F1D1C65840049A07F /* GameScene.sks */; };
-		3FF8EB421D1C65840049A07F /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8EB411D1C65840049A07F /* GameScene.swift */; };
+		3FF8EB421D1C65840049A07F /* BaseGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8EB411D1C65840049A07F /* BaseGameScene.swift */; };
 		3FF8EB441D1C65840049A07F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF8EB431D1C65840049A07F /* GameViewController.swift */; };
 		3FF8EB471D1C65840049A07F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8EB451D1C65840049A07F /* Main.storyboard */; };
 		3FF8EB491D1C65840049A07F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FF8EB481D1C65840049A07F /* Assets.xcassets */; };
@@ -35,6 +37,8 @@
 		3FD28FB11D2050FA004F1964 /* Touch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Touch.caf; sourceTree = "<group>"; };
 		3FD28FB31D2053EC004F1964 /* Alert.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Alert.caf; sourceTree = "<group>"; };
 		3FE1690A1D1ECFAD0038A7B3 /* ProgressNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressNode.swift; sourceTree = "<group>"; };
+		3FE49FCC1D2F259C00ABAFA4 /* Level_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level_1.swift; sourceTree = "<group>"; };
+		3FE49FCE1D2F27E800ABAFA4 /* Level_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level_2.swift; sourceTree = "<group>"; };
 		3FF03A761D1DEFBB009180B2 /* GameOverNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverNode.swift; sourceTree = "<group>"; };
 		3FF8230F1D246EC400B4ECCD /* Switch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Switch.caf; sourceTree = "<group>"; };
 		3FF823131D248BB000B4ECCD /* GameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameOver.wav; sourceTree = "<group>"; };
@@ -42,7 +46,7 @@
 		3FF8EB3A1D1C65840049A07F /* TipTapTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipTapTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FF8EB3D1D1C65840049A07F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FF8EB3F1D1C65840049A07F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		3FF8EB411D1C65840049A07F /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		3FF8EB411D1C65840049A07F /* BaseGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGameScene.swift; sourceTree = "<group>"; };
 		3FF8EB431D1C65840049A07F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		3FF8EB461D1C65840049A07F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3FF8EB481D1C65840049A07F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +79,16 @@
 			name = Sounds;
 			sourceTree = "<group>";
 		};
+		3FE49FCB1D2F244B00ABAFA4 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				3FF8EB411D1C65840049A07F /* BaseGameScene.swift */,
+				3FE49FCC1D2F259C00ABAFA4 /* Level_1.swift */,
+				3FE49FCE1D2F27E800ABAFA4 /* Level_2.swift */,
+			);
+			name = Levels;
+			sourceTree = "<group>";
+		};
 		3FF8EB311D1C65840049A07F = {
 			isa = PBXGroup;
 			children = (
@@ -94,10 +108,9 @@
 		3FF8EB3C1D1C65840049A07F /* TipTapTop */ = {
 			isa = PBXGroup;
 			children = (
+				3FE49FCB1D2F244B00ABAFA4 /* Levels */,
 				3FD28FB01D2050D4004F1964 /* Sounds */,
 				3FF8EB3D1D1C65840049A07F /* AppDelegate.swift */,
-				3FF8EB3F1D1C65840049A07F /* GameScene.sks */,
-				3FF8EB411D1C65840049A07F /* GameScene.swift */,
 				3F7214991D282BB100EF9399 /* LevelConfigurations.swift */,
 				3F7214971D2821BB00EF9399 /* LevelConfigurations.plist */,
 				3F1C77E41D2DAC8300FA8A81 /* LevelsViewController.swift */,
@@ -110,6 +123,7 @@
 				3FF8EB481D1C65840049A07F /* Assets.xcassets */,
 				3FF8EB4A1D1C65840049A07F /* LaunchScreen.storyboard */,
 				3FF8EB4D1D1C65840049A07F /* Info.plist */,
+				3FF8EB3F1D1C65840049A07F /* GameScene.sks */,
 			);
 			path = TipTapTop;
 			sourceTree = "<group>";
@@ -192,9 +206,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FE49FCF1D2F27E800ABAFA4 /* Level_2.swift in Sources */,
+				3FE49FCD1D2F259C00ABAFA4 /* Level_1.swift in Sources */,
 				3F1C77E51D2DAC8300FA8A81 /* LevelsViewController.swift in Sources */,
 				3FF8EB541D1C7E450049A07F /* TouchPad.swift in Sources */,
-				3FF8EB421D1C65840049A07F /* GameScene.swift in Sources */,
+				3FF8EB421D1C65840049A07F /* BaseGameScene.swift in Sources */,
 				3FF8EB441D1C65840049A07F /* GameViewController.swift in Sources */,
 				3FF8EB3E1D1C65840049A07F /* AppDelegate.swift in Sources */,
 				3FE1690B1D1ECFAD0038A7B3 /* ProgressNode.swift in Sources */,

@@ -10,7 +10,7 @@ import SpriteKit
 import AVFoundation
 
 //TO-DO: Initializer GameScene
-class GameScene: SKScene {
+class BaseGameScene: SKScene {
     //MARK: Scene variables
     var touchPads = [TouchPad]()
     //Time variables
@@ -34,7 +34,7 @@ class GameScene: SKScene {
     var viewController: ViewControllerDelegate?
     
     //MARK: Configuration
-    let levelName = "Default"
+    var levelName = "Default"
     //Colors
     var colors: Colors?
     
@@ -55,8 +55,11 @@ class GameScene: SKScene {
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
         do{
+            print("Level:\(self.levelName)")
+
             //we load the settings in our variables
             try self.loadSettings(self.levelName)
+            
             
             //we define the scene color
             self.backgroundColor = self.colors!.backGroundColor
@@ -109,7 +112,7 @@ class GameScene: SKScene {
             //we make a small sound
             self.runAction(self.touchSFX!){
                 //once the sound is over, we reload the game with a new view
-                let gameScene = GameScene(size: self.frame.size)
+                let gameScene = BaseGameScene(size: self.frame.size)
                 self.view?.presentScene(gameScene)
 
             }
@@ -372,7 +375,7 @@ class GameScene: SKScene {
     In case of incomplete configurations, throws a dedidacted error
     */
     func loadSettings(levelName: String) throws {
-        let levelConfig = try LevelConfigurations(levelName: "Default")
+        let levelConfig = try LevelConfigurations(levelName: levelName)
         //we unwrap and use gameplay settings
         if let gameplay = levelConfig.gameplay{
             self.gameplay = gameplay

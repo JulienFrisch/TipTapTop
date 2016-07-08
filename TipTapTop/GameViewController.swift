@@ -11,6 +11,8 @@ import SpriteKit
 
 class GameViewController: UIViewController, ViewControllerDelegate {
     
+    var level = String()
+        
     override func loadView() {
         super.loadView()
         //we make sure the view is some type SKView for the later function viewDidAppear
@@ -20,8 +22,16 @@ class GameViewController: UIViewController, ViewControllerDelegate {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        //we select a scene based on the level name updated previously within the LevelsViewController
+        let scene: BaseGameScene?
+        switch level {
+            case "Level_1": scene = Level_1(fileNamed: "GameScene")
+            case "Level_2": scene = Level_2(fileNamed: "GameScene")
+        default: scene = BaseGameScene(fileNamed: "GameScene")
+        }
 
-        if let scene = GameScene(fileNamed:"GameScene") {
+        if let scene = scene {
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true

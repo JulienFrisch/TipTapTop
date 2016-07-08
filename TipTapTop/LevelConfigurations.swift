@@ -11,7 +11,6 @@ import UIKit
 
 
 //MARK: Helper Classes and methods
-
 /**
 Error Types for our plist configuration
  */

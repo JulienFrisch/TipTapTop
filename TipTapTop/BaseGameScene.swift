@@ -34,7 +34,7 @@ class BaseGameScene: SKScene {
     var viewController: ViewControllerDelegate?
     
     //MARK: Configuration
-    var levelName = "Default"
+    var levelConfigurationName = "Default"
     //Colors
     var colors: Colors?
     
@@ -55,10 +55,12 @@ class BaseGameScene: SKScene {
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
         do{
-            print("Level:\(self.levelName)")
+            //we make sure that multiple touch is enabled
+            self.view?.multipleTouchEnabled = true
 
+            
             //we load the settings in our variables
-            try self.loadSettings(self.levelName)
+            try self.loadSettings(self.levelConfigurationName)
             
             
             //we define the scene color
@@ -69,32 +71,26 @@ class BaseGameScene: SKScene {
             self.addChild(progressBar)
             
             //we place 8 touchpoints, and add them to the touchpoints variable
-            for i in 0...7 {
-                let x = (self.frame.size.width / 4) * CGFloat(1 + (i % 2) * 2)
-                let y = ((self.frame.size.height - progressBar.height - 2 * self.progressBarVerticalIntervalSpace) / 8) * CGFloat(1 + i - i % 2)
-                let touchpad = TouchPad.createAtPosition(CGPointMake(x, y))
-                self.addChild(touchpad)
-                self.touchPads.append(touchpad)
-            }
+            self.addTouchPads(progressBar)
             
             //we prepare our musics
             //we add our music
             self.setupMusics()
         } catch ConfigurationError.LevelError {
             self.paused = true
-            self.showAlert("Level Error", message: "Could not load configurations of the level:\(self.levelName)")
+            self.showAlert("Level Error", message: "Could not load configurations of the level:\(self.levelConfigurationName)")
         } catch ConfigurationError.ColorsError {
             self.paused = true
-            self.showAlert("Level Error", message: "Could not load the colors of the level:\(self.levelName)")
+            self.showAlert("Level Error", message: "Could not load the colors of the level:\(self.levelConfigurationName)")
         } catch ConfigurationError.GamePlayError {
             self.paused = true
-            self.showAlert("Level Error", message: "Could not load the GamePlay of the level:\(self.levelName)")
+            self.showAlert("Level Error", message: "Could not load the GamePlay of the level:\(self.levelConfigurationName)")
         } catch ConfigurationError.SFXError {
             self.paused = true
-            self.showAlert("Level Error", message: "Could not load the sound effects of the level :\(self.levelName)")
+            self.showAlert("Level Error", message: "Could not load the sound effects of the level :\(self.levelConfigurationName)")
         } catch ConfigurationError.MusicsError {
             self.paused = true
-            self.showAlert("Level Error", message: "Could not load the music of the level :\(self.levelName)")
+            self.showAlert("Level Error", message: "Could not load the music of the level :\(self.levelConfigurationName)")
         } catch let error {
             self.paused = true
             print(error)
@@ -366,6 +362,19 @@ class BaseGameScene: SKScene {
             }
         } else {
             print("Impossible to find the game win music.")
+        }
+    }
+    
+    /**
+    Load and display the touchpads in the SKSCene while letting some room for the ProgressNode
+    */
+    func addTouchPads(progressBar: ProgressNode){
+        for i in 0...7 {
+            let x = (self.frame.size.width / 4) * CGFloat(1 + (i % 2) * 2)
+            let y = ((self.frame.size.height - progressBar.height - 2 * self.progressBarVerticalIntervalSpace) / 8) * CGFloat(1 + i - i % 2)
+            let touchpad = TouchPad.createAtPosition(CGPointMake(x, y))
+            self.addChild(touchpad)
+            self.touchPads.append(touchpad)
         }
     }
     

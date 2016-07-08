@@ -8,11 +8,11 @@
 
 import SpriteKit
 
-class Level_2: BaseGameScene {
+class Vanilla_Easy: BaseGameScene {
     
     override func didMoveToView(view: SKView){
-        //We suse a different level name to load different settings
-        self.levelName = "Level_2"
+        //We use a different level name to load different settings
+        self.levelConfigurationName = "Vanilla_Easy"
         super.didMoveToView(view)
     }
     

@@ -24,7 +24,6 @@ class TouchPad: SKShapeNode {
     let touchColorStroke = UIColor(red: 255/255, green: 229/255, blue: 204/255, alpha: 1.0)
     let warningColorFill = UIColor(red: 255/255, green: 0.0, blue: 0.0, alpha: 1.0)
     let warningColorStroke = UIColor(red: 225/255, green: 0.0, blue: 0.0, alpha: 1.0)
-    static let radius: CGFloat = 75.0
 
     //Time variables
     let timeLimit: NSTimeInterval = 4.0
@@ -35,11 +34,11 @@ class TouchPad: SKShapeNode {
     let touchSFX = SKAction.playSoundFileNamed("Touch.caf", waitForCompletion: false)
     
     /**
-    Create and return a touchpad at a specified location
+    Create and return a touchpad at a specified location with a defined radius (75.0 by default)
     */
-    class func createAtPosition(position: CGPoint) -> TouchPad{
+    class func createAtPosition(position: CGPoint, radius: CGFloat = 75.0) -> TouchPad{
         //we create the touchpad
-        let touchpad = TouchPad(circleOfRadius: TouchPad.radius)
+        let touchpad = TouchPad(circleOfRadius: radius)
         
         //we assume the touchpoint starts neutral
         touchpad.fillColor = touchpad.neutralColorFill
@@ -66,7 +65,7 @@ class TouchPad: SKShapeNode {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //if we are over our time limit, we disable all actions
         if !timeOut {
-            
+                        
             //we update the touched value
             self.touched = true
             
@@ -121,7 +120,7 @@ class TouchPad: SKShapeNode {
                 touchPadTouched = true
             }
         }
-        //if at least on touce touches the touchpad
+        //if at least on touche touches the touchpad
         if touchPadTouched{
             //we retrieve the Current Time
             self.lastTouched = event!.timestamp

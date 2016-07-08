@@ -26,11 +26,13 @@ class GameViewController: UIViewController, ViewControllerDelegate {
         //we select a scene based on the level name updated previously within the LevelsViewController
         let scene: BaseGameScene?
         switch level {
-            case "Level_1": scene = Level_1(fileNamed: "GameScene")
-            case "Level_2": scene = Level_2(fileNamed: "GameScene")
-        default: scene = BaseGameScene(fileNamed: "GameScene")
+            case "Vanilla_Easy": scene = Vanilla_Easy(fileNamed: "GameScene")
+            case "Vanilla_Hard": scene = Vanilla_Hard(fileNamed: "GameScene")
+            case "MultiTouch_Easy": scene = MultiTouch_Easy(fileNamed: "GameScene")
+            case "MultiTouch_Hard": scene = MultiTouch_Hard(fileNamed: "GameScene")
+            default: scene = BaseGameScene(fileNamed: "GameScene")
         }
-
+        
         if let scene = scene {
             // Configure the view.
             let skView = self.view as! SKView

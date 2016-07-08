@@ -11,7 +11,10 @@ import UIKit
 class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tableView: UITableView!
-    let levels: [String] = ["Level_1","Level_2"]
+    let levels: [String] = ["Vanilla_Easy",
+                            "Vanilla_Hard",
+                            "MultiTouch_Easy",
+                            "MultiTouch_Hard"]
     
     //MARK: UIViewController methods
     

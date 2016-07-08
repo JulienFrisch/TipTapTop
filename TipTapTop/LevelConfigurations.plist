@@ -48,7 +48,7 @@
 			<string>Touch.caf</string>
 		</dict>
 	</dict>
-	<key>Level_1</key>
+	<key>Vanilla_Easy</key>
 	<dict>
 		<key>Colors</key>
 		<dict>
@@ -94,7 +94,7 @@
 			<string>Touch.caf</string>
 		</dict>
 	</dict>
-	<key>Level_2</key>
+	<key>Vanilla_Hard</key>
 	<dict>
 		<key>Colors</key>
 		<dict>

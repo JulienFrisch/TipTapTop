@@ -14,7 +14,9 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let levels: [String] = ["Vanilla_Easy",
                             "Vanilla_Hard",
                             "MultiTouch_Easy",
-                            "MultiTouch_Hard"]
+                            "MultiTouch_Hard",
+                            "BigsAndSmalls_Easy",
+                            "BigsAndSmalls_Hard"]
     
     //MARK: UIViewController methods
     

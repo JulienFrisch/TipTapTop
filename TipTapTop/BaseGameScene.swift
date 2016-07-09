@@ -369,10 +369,12 @@ class BaseGameScene: SKScene {
     Load and display the touchpads in the SKSCene while letting some room for the ProgressNode
     */
     func addTouchPads(progressBar: ProgressNode){
+        let deltaX = self.frame.size.width / 4
+        let deltaY = (self.frame.size.height - progressBar.height - 2 * self.progressBarVerticalIntervalSpace) / 8
         for i in 0...7 {
-            let x = (self.frame.size.width / 4) * CGFloat(1 + (i % 2) * 2)
-            let y = ((self.frame.size.height - progressBar.height - 2 * self.progressBarVerticalIntervalSpace) / 8) * CGFloat(1 + i - i % 2)
-            let touchpad = TouchPad.createAtPosition(CGPointMake(x, y))
+            let x = deltaX * CGFloat(1 + (i % 2) * 2)
+            let y = deltaY * CGFloat(1 + i - i % 2)
+            let touchpad = TouchPad.createAtPosition(CGPointMake(x, y), radius: min(deltaX,deltaY) * 0.90)
             self.addChild(touchpad)
             self.touchPads.append(touchpad)
         }

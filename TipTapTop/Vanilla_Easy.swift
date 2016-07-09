@@ -18,3 +18,14 @@ class Vanilla_Easy: BaseGameScene {
     
 
 }
+
+class Vanilla_Hard: BaseGameScene {
+    
+    override func didMoveToView(view: SKView){
+        //We suse a different level name to load different settings
+        self.levelConfigurationName = "Vanilla_Hard"
+        super.didMoveToView(view)
+    }
+    
+    
+}

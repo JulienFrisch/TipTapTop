@@ -19,7 +19,7 @@ class MultiTouch: BaseGameScene {
             for yi in 0...5 {
                 let x = deltaX * (1.0 + CGFloat(xi) * 2.0)
                 let y = deltaY * (1.0 + CGFloat(yi) * 2.0)
-                let touchpad = TouchPad.createAtPosition(CGPointMake(x, y), radius: 50.0)
+                let touchpad = TouchPad.createAtPosition(CGPointMake(x, y), radius: min(deltaX,deltaY) * 0.90)
                 self.addChild(touchpad)
                 self.touchPads.append(touchpad)
             }

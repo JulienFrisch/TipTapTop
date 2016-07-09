@@ -32,6 +32,8 @@ class GameViewController: UIViewController, ViewControllerDelegate {
             case "MultiTouch_Hard": scene = MultiTouch_Hard(fileNamed: "GameScene")
             case "BigsAndSmalls_Easy": scene = BigsAndSmalls_Easy(fileNamed: "GameScene")
             case "BigsAndSmalls_Hard": scene = BigsAndSmalls_Hard(fileNamed: "GameScene")
+            case "Motion_Easy": scene = Motion_Easy(fileNamed: "GameScene")
+            case "Motion_Hard": scene = Motion_Hard(fileNamed: "GameScene")
             default: scene = BaseGameScene(fileNamed: "GameScene")
         }
         

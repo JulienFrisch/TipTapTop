@@ -16,7 +16,9 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             "MultiTouch_Easy",
                             "MultiTouch_Hard",
                             "BigsAndSmalls_Easy",
-                            "BigsAndSmalls_Hard"]
+                            "BigsAndSmalls_Hard",
+                            "Motion_Easy",
+                            "Motion_Hard"]
     
     //MARK: UIViewController methods
     

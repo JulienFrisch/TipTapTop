@@ -9,7 +9,7 @@
 import SpriteKit
 import CoreMotion
 
-class Motion: BaseGameScene, Gravity {
+class MotionBigSmall: BigsAndSmalls {
     //MARK: Motion Manager variables
     
     //we are going to use the motion manager to read the acceleremoter
@@ -36,8 +36,7 @@ class Motion: BaseGameScene, Gravity {
     */
     override func update(currentTime: CFTimeInterval) {
         super.update(currentTime)
-        //we use our gravity protocol extension
-        self.processUserMotionForUpdate(currentTime, touchPads: self.touchPads)
+        self.processUserMotionForUpdate(currentTime)
     }
     
     
@@ -46,12 +45,39 @@ class Motion: BaseGameScene, Gravity {
     */
     override func addTouchPads(progressBar: ProgressNode) {
         super.addTouchPads(progressBar)
-        //we use our gravity protocol extension
-        self.addPhysicBody(self.touchPads)
+        for touchpad in self.touchPads{
+            //we create the touchpad physic body
+            touchpad.physicsBody = SKPhysicsBody(circleOfRadius: touchpad.frame.size.width / 2)
+            //we confirm the touchpad physic body is affected by the laws of physics
+            touchpad.physicsBody?.dynamic = true
+            //not by gravity (we will apply a custom force later)
+            touchpad.physicsBody!.affectedByGravity = false
+            //we assign it a mass
+            touchpad.physicsBody?.mass = self.touchpadMass
+        }
+    }
+    
+    //MARK: Helper Methods
+    
+    /**
+    Function to move all the touchpads with the motion manager
+    */
+    func processUserMotionForUpdate(currentTime: CFTimeInterval) {
+        //we retrieve the acceleromter data
+        if let data = motionManager.accelerometerData{
+            //we do not move the touchpad if the acceleration value does not reach a certain threshold
+            if sqrt(pow(data.acceleration.x,2) + pow(data.acceleration.y,2)) > self.accelerationThreshold {
+                //we create a vector
+                let force = CGVectorMake(CGFloat(data.acceleration.x), CGFloat(data.acceleration.y))
+                for touchpad in self.touchPads{
+                    touchpad.physicsBody!.applyForce(force)
+                }
+            }
+        }
     }
 }
 
-class Motion_Easy: Motion {
+class MotionBigSmall_Easy: MotionBigSmall {
     override func didMoveToView(view: SKView){
         //We use a different level name to load different settings
         self.levelConfigurationName = "Vanilla_Easy"
@@ -60,7 +86,7 @@ class Motion_Easy: Motion {
     
 }
 
-class Motion_Hard: Motion {
+class MotionBigSmall_Hard: MotionBigSmall {
     override func didMoveToView(view: SKView){
         //We use a different level name to load different settings
         self.levelConfigurationName = "Vanilla_Hard"

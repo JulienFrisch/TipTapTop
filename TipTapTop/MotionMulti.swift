@@ -9,7 +9,7 @@
 import SpriteKit
 import CoreMotion
 
-class Motion: BaseGameScene, Gravity {
+class MotionMulti: MultiTouch, Gravity {
     //MARK: Motion Manager variables
     
     //we are going to use the motion manager to read the acceleremoter
@@ -51,7 +51,7 @@ class Motion: BaseGameScene, Gravity {
     }
 }
 
-class Motion_Easy: Motion {
+class MotionMulti_Easy: MotionMulti {
     override func didMoveToView(view: SKView){
         //We use a different level name to load different settings
         self.levelConfigurationName = "Vanilla_Easy"
@@ -60,7 +60,7 @@ class Motion_Easy: Motion {
     
 }
 
-class Motion_Hard: Motion {
+class MotionMulti_Hard: MotionMulti {
     override func didMoveToView(view: SKView){
         //We use a different level name to load different settings
         self.levelConfigurationName = "Vanilla_Hard"

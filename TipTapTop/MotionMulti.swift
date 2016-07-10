@@ -9,7 +9,7 @@
 import SpriteKit
 import CoreMotion
 
-class MotionMulti: MultiTouch, Gravity {
+class MotionMulti: BaseGameScene, Gravity, EighteenTouchPads {
     //MARK: Motion Manager variables
     
     //we are going to use the motion manager to read the acceleremoter
@@ -45,7 +45,8 @@ class MotionMulti: MultiTouch, Gravity {
     We add physics to our touchpads
     */
     override func addTouchPads(progressBar: ProgressNode) {
-        super.addTouchPads(progressBar)
+        //we use our EighteenTouchPads protocol
+        self.addEighteenTouchPads(progressBar, scene: self)
         //we use our gravity protocol extension
         self.addPhysicBody(self.touchPads)
     }

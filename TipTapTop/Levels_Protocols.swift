@@ -10,13 +10,78 @@ import Foundation
 import CoreMotion
 import SpriteKit
 
-protocol SixTeenTouchPads {
-    
+protocol EighteenTouchPads {
+    func addEighteenTouchPads(progressBar: ProgressNode, scene: BaseGameScene)
 }
 
-protocol EighteenTouchPads {
-    func addTouchPads(progressBar: ProgressNode)
+extension EighteenTouchPads {
+    func addEighteenTouchPads(progressBar: ProgressNode, scene: BaseGameScene){
+        let deltaX = scene.frame.size.width / 6
+        let deltaY = (scene.frame.size.height - progressBar.height - 2 * scene.progressBarVerticalIntervalSpace) / 12
+        for xi in 0...2 {
+            for yi in 0...5 {
+                let x = deltaX * (1.0 + CGFloat(xi) * 2.0)
+                let y = deltaY * (1.0 + CGFloat(yi) * 2.0)
+                let touchpad = TouchPad.createAtPosition(CGPointMake(x, y), radius: min(deltaX,deltaY) * 0.90)
+                scene.addChild(touchpad)
+                scene.touchPads.append(touchpad)
+            }
+        }
+    }
 }
+
+protocol EightTouchPads {
+    func addEightTouchPads(progressBar: ProgressNode, scene: BaseGameScene)
+}
+
+extension EightTouchPads {
+    func addEightTouchPads(progressBar: ProgressNode, scene: BaseGameScene){
+        let deltaX = scene.frame.size.width / 4
+        let deltaY = (scene.frame.size.height - progressBar.height - 2 * scene.progressBarVerticalIntervalSpace) / 8
+        for i in 0...7 {
+            let x = deltaX * CGFloat(1 + (i % 2) * 2)
+            let y = deltaY * CGFloat(1 + i - i % 2)
+            let touchpad = TouchPad.createAtPosition(CGPointMake(x, y), radius: min(deltaX,deltaY) * 0.90)
+            scene.addChild(touchpad)
+            scene.touchPads.append(touchpad)
+        }
+    }
+}
+
+protocol ThreeBigSixSmallTouchPads {
+    func addThreeBigSixSmallTouchPads(progressBar: ProgressNode, scene: BaseGameScene)
+}
+
+extension ThreeBigSixSmallTouchPads {
+    func addThreeBigSixSmallTouchPads(progressBar: ProgressNode, scene: BaseGameScene){
+        let deltaX = scene.frame.size.width / 6
+        let deltaY = (scene.frame.size.height - progressBar.height - 2 * scene.progressBarVerticalIntervalSpace) / 12
+        
+        //first we put the "Big" touchpads
+        let bigPos: [CGPoint] = [CGPointMake(2 * deltaX, 2 * deltaY),
+                                 CGPointMake(4 * deltaX, 6 * deltaY),
+                                 CGPointMake(2 * deltaX, 10 * deltaY)]
+        for position in bigPos {
+            let bigTouchPad = TouchPad.createAtPosition(position, radius:  2 * min(deltaX, deltaY) * 0.95)
+            scene.addChild(bigTouchPad)
+            scene.touchPads.append(bigTouchPad)
+        }
+        
+        //Now the "Small" touchpads
+        let smallPos: [CGPoint] = [CGPointMake(5 * deltaX, deltaY),
+                                   CGPointMake(5 * deltaX, 3 * deltaY),
+                                   CGPointMake(5 * deltaX, 9 * deltaY),
+                                   CGPointMake(5 * deltaX, 11 * deltaY),
+                                   CGPointMake(deltaX, 5 * deltaY),
+                                   CGPointMake(deltaX, 7 * deltaY)]
+        for position in smallPos {
+            let smallTouchPad = TouchPad.createAtPosition(position, radius: min(deltaX, deltaY) * 0.95)
+            scene.addChild(smallTouchPad)
+            scene.touchPads.append(smallTouchPad)
+        }
+    }
+}
+
 
 /**
  Gravity Protocol
@@ -99,10 +164,7 @@ extension Gravity {
                 let randomY = CGFloat(drand48()) * 20.0 - 10.0
                 let oppositeRandomVector = CGVectorMake(oppositeVector.dx + randomX, oppositeVector.dy + randomY)
                 touchpad.physicsBody?.applyForce(oppositeRandomVector)
-                print("Force applied:\(oppositeRandomVector.dx);\(oppositeRandomVector.dy)")
             }
-
-
         }
     }
 

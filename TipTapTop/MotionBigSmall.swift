@@ -9,7 +9,7 @@
 import SpriteKit
 import CoreMotion
 
-class MotionBigSmall: BigsAndSmalls, Gravity {
+class MotionBigSmall: BaseGameScene, Gravity, ThreeBigSixSmallTouchPads {
     //MARK: Motion Manager variables
     
     //we are going to use the motion manager to read the acceleremoter
@@ -42,10 +42,12 @@ class MotionBigSmall: BigsAndSmalls, Gravity {
     
     
     /**
+    We use three big and six small touchpags instead of 8 regular ones
     We add physics to our touchpads
     */
     override func addTouchPads(progressBar: ProgressNode) {
-        super.addTouchPads(progressBar)
+        //we use our ThreeBigSixSmallTouchPads protocol
+        self.addThreeBigSixSmallTouchPads(progressBar, scene: self)
         //we use our gravity protocol extension
         self.addPhysicBody(self.touchPads)
     }

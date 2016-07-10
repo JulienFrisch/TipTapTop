@@ -8,24 +8,30 @@
 
 import SpriteKit
 
-class Vanilla_Easy: BaseGameScene {
+class Vanilla: BaseGameScene, EightTouchPads{
+    /**
+     We load a 8 touchpads
+     */
+    override func addTouchPads(progressBar: ProgressNode){
+        //we use our EightTouchPads protocol
+        self.addEightTouchPads(progressBar, scene: self)
+    }
+}
+
+class Vanilla_Easy: Vanilla {
     
     override func didMoveToView(view: SKView){
         //We use a different level name to load different settings
         self.levelConfigurationName = "Vanilla_Easy"
         super.didMoveToView(view)
     }
-    
-
 }
 
-class Vanilla_Hard: BaseGameScene {
+class Vanilla_Hard: Vanilla {
     
     override func didMoveToView(view: SKView){
         //We suse a different level name to load different settings
         self.levelConfigurationName = "Vanilla_Hard"
         super.didMoveToView(view)
     }
-    
-    
 }

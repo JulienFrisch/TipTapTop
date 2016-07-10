@@ -31,24 +31,32 @@ protocol Gravity {
     
     func processUserMotionForUpdate(currentTime: CFTimeInterval, touchPads: [TouchPad])
     func addPhysicBody(touchPads: [TouchPad])
+    func shake(touchPads: [TouchPad])
+    func retrieveVector() -> CGVector?
 }
 
 extension Gravity {
     
+    /**
+    Retrieve the phone position and moves touchpads accordingly
+    */
     func processUserMotionForUpdate(currentTime: CFTimeInterval, touchPads: [TouchPad]){
-        //we retrieve the acceleromter data
-        if let data = self.motionManager.accelerometerData{
+        //we retrieve the vector to be used
+        let vector = self.retrieveVector()
+        //we unwrap it
+        if let vector = vector{
             //we do not move the touchpad if the acceleration value does not reach a certain threshold
-            if sqrt(pow(data.acceleration.x,2) + pow(data.acceleration.y,2)) > self.accelerationThreshold {
-                //we create a vector
-                let force = CGVectorMake(CGFloat(data.acceleration.x), CGFloat(data.acceleration.y))
+            if sqrt(pow(Double(vector.dx),2) + pow(Double(vector.dy),2)) > self.accelerationThreshold {
                 for touchpad in touchPads{
-                    touchpad.physicsBody!.applyForce(force)
+                    touchpad.physicsBody?.applyForce(vector)
                 }
             }
         }
     }
     
+    /**
+    Assign a physic body to a set of touchpads
+    */
     func addPhysicBody(touchPads: [TouchPad]){
         for touchpad in touchPads{
             //we create the touchpad physic body
@@ -61,5 +69,42 @@ extension Gravity {
             touchpad.physicsBody?.mass = self.touchpadMass
         }
     }
+    
+    /**
+    Retrieve the force to be applied to a touchpad absed on the phone position
+    */
+    func retrieveVector() -> CGVector?{
+        var vector: CGVector?
+        //we retrieve the acceleromter data
+        if let data = self.motionManager.accelerometerData{
+            //we create a vector
+            vector = CGVectorMake(CGFloat(data.acceleration.x), CGFloat(data.acceleration.y))
+        }
+        return vector
+    }
+    
+    
+    
+    /**
+    Apply an opposite force to a set of touchpads
+    */
+    func shake(touchpads: [TouchPad]){
+        //we retrieve the force currently applied by phone position and use its opposite
+        let currentVector = self.retrieveVector()
+        if let currentVector = currentVector{
+            let oppositeVector = CGVectorMake(-currentVector.dx * 50, -currentVector.dy * 50)
+            for touchpad in touchpads{
+                //we add a little bit of randomness
+                let randomX = CGFloat(drand48()) * 20.0 - 10.0
+                let randomY = CGFloat(drand48()) * 20.0 - 10.0
+                let oppositeRandomVector = CGVectorMake(oppositeVector.dx + randomX, oppositeVector.dy + randomY)
+                touchpad.physicsBody?.applyForce(oppositeRandomVector)
+                print("Force applied:\(oppositeRandomVector.dx);\(oppositeRandomVector.dy)")
+            }
+
+
+        }
+    }
+
 }
 

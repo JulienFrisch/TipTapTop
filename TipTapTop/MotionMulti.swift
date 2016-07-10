@@ -49,6 +49,15 @@ class MotionMulti: MultiTouch, Gravity {
         //we use our gravity protocol extension
         self.addPhysicBody(self.touchPads)
     }
+    
+    /**
+     We shake the touchpads after each switch
+     */
+    override func runRandomSwitch(touchPads: [TouchPad], maxTouchPadsActivated: Int, currentTime: NSTimeInterval) {
+        super.runRandomSwitch(touchPads, maxTouchPadsActivated: maxTouchPadsActivated, currentTime: currentTime)
+        //we use our gravity protocol extension
+        self.shake(touchPads)
+    }
 }
 
 class MotionMulti_Easy: MotionMulti {

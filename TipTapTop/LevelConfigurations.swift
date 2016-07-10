@@ -161,7 +161,7 @@ struct LevelConfigurations{
                 let switchSFX = sounds.valueForKey("Switch") as? String,
                 let touchSFX = sounds.valueForKey("Touch") as? String
             {
-                self.sounds = Sounds(switchSFX: alertSFX, alertSFX: switchSFX, touchSFX: touchSFX)
+                self.sounds = Sounds(switchSFX: switchSFX, alertSFX: alertSFX, touchSFX: touchSFX)
             } else {
                 print("Incomplete sounds definition for:\(levelName)")
                 throw(ConfigurationError.SFXError)

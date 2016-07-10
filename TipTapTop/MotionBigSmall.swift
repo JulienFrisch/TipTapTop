@@ -9,7 +9,7 @@
 import SpriteKit
 import CoreMotion
 
-class MotionBigSmall: BigsAndSmalls {
+class MotionBigSmall: BigsAndSmalls, Gravity {
     //MARK: Motion Manager variables
     
     //we are going to use the motion manager to read the acceleremoter
@@ -36,7 +36,8 @@ class MotionBigSmall: BigsAndSmalls {
     */
     override func update(currentTime: CFTimeInterval) {
         super.update(currentTime)
-        self.processUserMotionForUpdate(currentTime)
+        //we use our gravity protocol extension
+        self.processUserMotionForUpdate(currentTime, touchPads: self.touchPads)
     }
     
     
@@ -45,35 +46,17 @@ class MotionBigSmall: BigsAndSmalls {
     */
     override func addTouchPads(progressBar: ProgressNode) {
         super.addTouchPads(progressBar)
-        for touchpad in self.touchPads{
-            //we create the touchpad physic body
-            touchpad.physicsBody = SKPhysicsBody(circleOfRadius: touchpad.frame.size.width / 2)
-            //we confirm the touchpad physic body is affected by the laws of physics
-            touchpad.physicsBody?.dynamic = true
-            //not by gravity (we will apply a custom force later)
-            touchpad.physicsBody!.affectedByGravity = false
-            //we assign it a mass
-            touchpad.physicsBody?.mass = self.touchpadMass
-        }
+        //we use our gravity protocol extension
+        self.addPhysicBody(self.touchPads)
     }
     
-    //MARK: Helper Methods
-    
     /**
-    Function to move all the touchpads with the motion manager
-    */
-    func processUserMotionForUpdate(currentTime: CFTimeInterval) {
-        //we retrieve the acceleromter data
-        if let data = motionManager.accelerometerData{
-            //we do not move the touchpad if the acceleration value does not reach a certain threshold
-            if sqrt(pow(data.acceleration.x,2) + pow(data.acceleration.y,2)) > self.accelerationThreshold {
-                //we create a vector
-                let force = CGVectorMake(CGFloat(data.acceleration.x), CGFloat(data.acceleration.y))
-                for touchpad in self.touchPads{
-                    touchpad.physicsBody!.applyForce(force)
-                }
-            }
-        }
+     We shake the touchpads after each switch
+     */
+    override func runRandomSwitch(touchPads: [TouchPad], maxTouchPadsActivated: Int, currentTime: NSTimeInterval) {
+        super.runRandomSwitch(touchPads, maxTouchPadsActivated: maxTouchPadsActivated, currentTime: currentTime)
+        //we use our gravity protocol extension
+        self.shake(touchPads)
     }
 }
 

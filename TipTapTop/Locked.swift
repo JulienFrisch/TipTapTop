@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class BigSmallLocked: BaseGameScene, ThreeBigSixSmallTouchPads, Lock {
+class BigSmallLocked: BaseGameScene, ThreeBigSixSmallTouchPads, Lockable {
     //We define a dedicated array of touchpads to store those which are locked
     var lockedTouchPads = [TouchPad]()
     

@@ -16,6 +16,14 @@ protocol EighteenTouchPads {
 }
 
 extension EighteenTouchPads {
+    /**
+     (05)(11)(17)
+     (04)(10)(16)
+     (03)(09)(15)
+     (02)(08)(14)
+     (01)(07)(13)
+     (00)(06)(12)
+     */
     func addEighteenTouchPads(progressBar: ProgressNode, scene: BaseGameScene){
         let deltaX = scene.frame.size.width / 6
         let deltaY = (scene.frame.size.height - progressBar.height - 2 * scene.progressBarVerticalIntervalSpace) / 12
@@ -36,6 +44,12 @@ protocol EightTouchPads {
 }
 
 extension EightTouchPads {
+    /**
+     (6)(7)
+     (4)(5)
+     (2)(3)
+     (0)(1)
+    */
     func addEightTouchPads(progressBar: ProgressNode, scene: BaseGameScene){
         let deltaX = scene.frame.size.width / 4
         let deltaY = (scene.frame.size.height - progressBar.height - 2 * scene.progressBarVerticalIntervalSpace) / 8
@@ -174,14 +188,15 @@ extension Gravity {
 /**
  Enable the locking of a touchpad in the game scene
  */
-protocol Lock: class {
+protocol Lockable: class {
     //We define a dedicated array of touchpads to store those which are locked
     var lockedTouchPads: [TouchPad] { get set }
+    
     func lock(touchpad: TouchPad)
     func unlock(touchpad: TouchPad)
 }
 
-extension Lock {
+extension Lockable {
     /**
     We turn on a selected touchpadd and add it to the list of locked touch pads
     */
@@ -197,6 +212,60 @@ extension Lock {
         if let index = self.lockedTouchPads.indexOf(touchpad){
             lockedTouchPads.removeAtIndex(index)
         }
+    }
+}
+
+/**
+ Enable the touchpad to move in the game scene
+ */
+protocol Moveable {
+    func moveTouchPad(touchpad: TouchPad, time: NSTimeInterval, points:[CGPoint], loops: Int)
+}
+
+extension Moveable{
+    
+    /**
+    We move the touchpad from its original position to the latest element of the array points in a specified time, and repeat for a definite number of loop
+     */
+    func moveTouchPad(touchpad: TouchPad, time: NSTimeInterval, points:[CGPoint], loops: Int){
+        // if points has no element we do not have to move anything
+        if points.count == 0 {
+            return
+        }
+        
+        //we add the current position of the touchpad to the list of points at the first place
+        var extPoints = points
+        extPoints.insert(touchpad.position, atIndex: 0)
+        
+        //we compute the different distances
+        var distances = [Double]()
+        for index in 0...points.count - 1 {
+            distances.append(self.distance(extPoints[index], p2: extPoints[index + 1]))
+        }
+        
+        //we compute the total distance
+        let totalDistance = distances.reduce(0, combine: + )
+        
+        //we create a set of moves
+        var moves = [SKAction]()
+        for index in 0...points.count - 1 {
+            let movement = SKAction.moveByX(extPoints[index + 1].x - extPoints[index].x, y: extPoints[index + 1].y - extPoints[index].y, duration: time * (distances[index] / totalDistance))
+            moves.append(movement)
+        }
+        
+        //we create the required action combining all those moves
+        let totalMove = SKAction.sequence(moves)
+        let moveAndRepeat = SKAction.repeatAction(totalMove, count: loops)
+        
+        //we run the action on our touchpoint
+        touchpad.runAction(moveAndRepeat)
+    }
+    
+    /**
+    Return the distance between two points
+    */
+    func distance(p1: CGPoint, p2: CGPoint) -> Double {
+        return Double(hypot(p1.x - p2.x, p1.y - p2.y))
     }
 }
 

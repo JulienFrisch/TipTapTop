@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F17F4101D357BC60050865F /* Moving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17F40F1D357BC60050865F /* Moving.swift */; };
 		3F1C77E51D2DAC8300FA8A81 /* LevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1C77E41D2DAC8300FA8A81 /* LevelsViewController.swift */; };
 		3F1CD3711D311C6F00A57288 /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1CD3701D311C6F00A57288 /* Motion.swift */; };
 		3F1CD3731D31356100A57288 /* MotionMulti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1CD3721D31356100A57288 /* MotionMulti.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F17F40F1D357BC60050865F /* Moving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Moving.swift; sourceTree = "<group>"; };
 		3F1C77E41D2DAC8300FA8A81 /* LevelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsViewController.swift; sourceTree = "<group>"; };
 		3F1CD3701D311C6F00A57288 /* Motion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
 		3F1CD3721D31356100A57288 /* MotionMulti.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionMulti.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				3FF8EB411D1C65840049A07F /* BaseGameScene.swift */,
 				3FE49FCC1D2F259C00ABAFA4 /* Vanilla_Easy.swift */,
 				3F2AED121D3039B700206EA0 /* MultiTouch.swift */,
+				3F17F40F1D357BC60050865F /* Moving.swift */,
 				3F7755EF1D32F4F4005484F1 /* Locked.swift */,
 				3F26F9701D30B7F8006EC3F7 /* Bigs_and_Smalls.swift */,
 				3F1CD3701D311C6F00A57288 /* Motion.swift */,
@@ -233,6 +236,7 @@
 				3FF8EB421D1C65840049A07F /* BaseGameScene.swift in Sources */,
 				3F7755F01D32F4F4005484F1 /* Locked.swift in Sources */,
 				3F1CD3711D311C6F00A57288 /* Motion.swift in Sources */,
+				3F17F4101D357BC60050865F /* Moving.swift in Sources */,
 				3FF8EB441D1C65840049A07F /* GameViewController.swift in Sources */,
 				3FF8EB3E1D1C65840049A07F /* AppDelegate.swift in Sources */,
 				3FE1690B1D1ECFAD0038A7B3 /* ProgressNode.swift in Sources */,

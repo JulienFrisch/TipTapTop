@@ -16,6 +16,7 @@
 		3F2AED131D3039B700206EA0 /* MultiTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2AED121D3039B700206EA0 /* MultiTouch.swift */; };
 		3F7214981D2821BB00EF9399 /* LevelConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F7214971D2821BB00EF9399 /* LevelConfigurations.plist */; };
 		3F72149A1D282BB100EF9399 /* LevelConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7214991D282BB100EF9399 /* LevelConfigurations.swift */; };
+		3F7755F01D32F4F4005484F1 /* Locked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7755EF1D32F4F4005484F1 /* Locked.swift */; };
 		3FD28FB21D2050FA004F1964 /* Touch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB11D2050FA004F1964 /* Touch.caf */; };
 		3FD28FB61D2053EC004F1964 /* Alert.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB31D2053EC004F1964 /* Alert.caf */; };
 		3FE1690B1D1ECFAD0038A7B3 /* ProgressNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1690A1D1ECFAD0038A7B3 /* ProgressNode.swift */; };
@@ -45,6 +46,7 @@
 		3F2AED121D3039B700206EA0 /* MultiTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiTouch.swift; sourceTree = "<group>"; };
 		3F7214971D2821BB00EF9399 /* LevelConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelConfigurations.plist; sourceTree = "<group>"; };
 		3F7214991D282BB100EF9399 /* LevelConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelConfigurations.swift; sourceTree = "<group>"; };
+		3F7755EF1D32F4F4005484F1 /* Locked.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locked.swift; sourceTree = "<group>"; };
 		3FD28FB11D2050FA004F1964 /* Touch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Touch.caf; sourceTree = "<group>"; };
 		3FD28FB31D2053EC004F1964 /* Alert.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Alert.caf; sourceTree = "<group>"; };
 		3FE1690A1D1ECFAD0038A7B3 /* ProgressNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressNode.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				3FF8EB411D1C65840049A07F /* BaseGameScene.swift */,
 				3FE49FCC1D2F259C00ABAFA4 /* Vanilla_Easy.swift */,
 				3F2AED121D3039B700206EA0 /* MultiTouch.swift */,
+				3F7755EF1D32F4F4005484F1 /* Locked.swift */,
 				3F26F9701D30B7F8006EC3F7 /* Bigs_and_Smalls.swift */,
 				3F1CD3701D311C6F00A57288 /* Motion.swift */,
 				3F1CD3721D31356100A57288 /* MotionMulti.swift */,
@@ -228,6 +231,7 @@
 				3FF8EB541D1C7E450049A07F /* TouchPad.swift in Sources */,
 				3F1CD3751D3135C300A57288 /* MotionBigSmall.swift in Sources */,
 				3FF8EB421D1C65840049A07F /* BaseGameScene.swift in Sources */,
+				3F7755F01D32F4F4005484F1 /* Locked.swift in Sources */,
 				3F1CD3711D311C6F00A57288 /* Motion.swift in Sources */,
 				3FF8EB441D1C65840049A07F /* GameViewController.swift in Sources */,
 				3FF8EB3E1D1C65840049A07F /* AppDelegate.swift in Sources */,

@@ -38,6 +38,8 @@ class GameViewController: UIViewController, ViewControllerDelegate {
             case "MotionMulti_Hard": scene = MotionMulti_Hard(fileNamed: "GameScene")
             case "MotionBigSmall_Easy": scene = MotionBigSmall_Easy(fileNamed: "GameScene")
             case "MotionBigSmall_Hard": scene = MotionBigSmall_Hard(fileNamed: "GameScene")
+            case "BigSmallLocked_Easy": scene = BigSmallLocked_Easy(fileNamed: "GameScene")
+            case "BigSmallLocked_Hard": scene = BigSmallLocked_Hard(fileNamed: "GameScene")
             default: scene = BaseGameScene(fileNamed: "GameScene")
         }
         

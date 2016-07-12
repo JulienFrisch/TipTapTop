@@ -22,7 +22,9 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             "MotionMulti_Easy",
                             "MotionMulti_Hard",
                             "MotionBigSmall_Easy",
-                            "MotionBigSmall_Hard"]
+                            "MotionBigSmall_Hard",
+                            "BigSmallLocked_Easy",
+                            "BigSmallLocked_Hard"]
     
     //MARK: UIViewController methods
     

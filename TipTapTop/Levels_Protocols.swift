@@ -10,6 +10,7 @@ import Foundation
 import CoreMotion
 import SpriteKit
 
+//MARK: Different TouchPoints map
 protocol EighteenTouchPads {
     func addEighteenTouchPads(progressBar: ProgressNode, scene: BaseGameScene)
 }
@@ -82,9 +83,10 @@ extension ThreeBigSixSmallTouchPads {
     }
 }
 
+//MARK: Added properties to GameScene
 
 /**
- Gravity Protocol
+ Enable Gravity features in the GameScene
  */
 protocol Gravity {
     //we are going to use the motion manager to read the acceleremoter
@@ -167,6 +169,34 @@ extension Gravity {
             }
         }
     }
+}
 
+/**
+ Enable the locking of a touchpad in the game scene
+ */
+protocol Lock: class {
+    //We define a dedicated array of touchpads to store those which are locked
+    var lockedTouchPads: [TouchPad] { get set }
+    func lock(touchpad: TouchPad)
+    func unlock(touchpad: TouchPad)
+}
+
+extension Lock {
+    /**
+    We turn on a selected touchpadd and add it to the list of locked touch pads
+    */
+    func lock(touchpad: TouchPad){
+        //touchpad.turnOn(currentTime)
+        lockedTouchPads.append(touchpad)
+    }
+    
+    /**
+     We remove a touchpad from the list of locked touch pads (we do not turn it off)
+     */
+    func unlock(touchpad: TouchPad){
+        if let index = self.lockedTouchPads.indexOf(touchpad){
+            lockedTouchPads.removeAtIndex(index)
+        }
+    }
 }
 

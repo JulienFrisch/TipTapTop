@@ -37,6 +37,27 @@ extension EighteenTouchPads {
             }
         }
     }
+    
+    /**
+    Retrieve a the index of a touchpad based on coordonates
+    */
+    func index(x x: Int, y: Int) -> Int? {
+        if x > 2 || y > 5 {
+            print("Out of range")
+            return nil
+        }
+        //we use the below matrix
+        /*
+         (05)(11)(17)
+         (04)(10)(16)
+         (03)(09)(15)
+         (02)(08)(14)
+         (01)(07)(13)
+         (00)(06)(12)
+         */
+        return (6 * x + y)
+    }
+
 }
 
 protocol EightTouchPads {

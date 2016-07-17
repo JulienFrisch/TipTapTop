@@ -8,7 +8,6 @@
 
 import UIKit
 import SpriteKit
-import QuartzCore
 
 /**
  Custom cell that loads a picture and a label
@@ -38,7 +37,8 @@ class LevelCell: UITableViewCell {
         if let image = UIImage(named: imageName){
             let resizedImage = resizeImage(size, image: image)
             let roundedImage = maskRoundedImage(resizedImage, radius: radius, strokeColor: UIColor.grayColor())
-            return roundedImage
+            let alphaImage = setAlpha(roundedImage, value: 0.2)
+            return alphaImage
         } else {
             print("no image available for \(imageName)")
             return nil
@@ -46,11 +46,11 @@ class LevelCell: UITableViewCell {
     }
     
     /**
-    Convenient ethod to resize an image
+    Convenient method to resize an image
      */
     func resizeImage(size: CGSize, image: UIImage) -> UIImage{
         //we resize the image
-        let hasAlpha = false
+        let hasAlpha = false //false to handle potential transparency
         let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
         
         UIGraphicsBeginImageContextWithOptions(size, hasAlpha, scale)
@@ -83,6 +83,28 @@ class LevelCell: UITableViewCell {
         UIGraphicsEndImageContext()
         
         return roundedImage
+    }
+    
+    /**
+    Conveninent method to change the image alpha
+    */
+    func setAlpha(image: UIImage, value:CGFloat) -> UIImage
+    {
+        UIGraphicsBeginImageContextWithOptions(image.size, false, 0.0)
+        
+        let ctx = UIGraphicsGetCurrentContext();
+        let area = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height);
+        
+        CGContextScaleCTM(ctx, 1, -1);
+        CGContextTranslateCTM(ctx, 0, -area.size.height);
+        CGContextSetBlendMode(ctx, CGBlendMode.Multiply);
+        CGContextSetAlpha(ctx, value);
+        CGContextDrawImage(ctx, area, image.CGImage);
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return newImage;
     }
 
 }

@@ -18,6 +18,7 @@
 		3F7214981D2821BB00EF9399 /* LevelConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F7214971D2821BB00EF9399 /* LevelConfigurations.plist */; };
 		3F72149A1D282BB100EF9399 /* LevelConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7214991D282BB100EF9399 /* LevelConfigurations.swift */; };
 		3F7755F01D32F4F4005484F1 /* Locked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7755EF1D32F4F4005484F1 /* Locked.swift */; };
+		3F84AF4C1D36D137001EF670 /* LevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F84AF4B1D36D137001EF670 /* LevelCell.swift */; };
 		3FD28FB21D2050FA004F1964 /* Touch.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB11D2050FA004F1964 /* Touch.caf */; };
 		3FD28FB61D2053EC004F1964 /* Alert.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD28FB31D2053EC004F1964 /* Alert.caf */; };
 		3FE1690B1D1ECFAD0038A7B3 /* ProgressNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1690A1D1ECFAD0038A7B3 /* ProgressNode.swift */; };
@@ -49,6 +50,7 @@
 		3F7214971D2821BB00EF9399 /* LevelConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LevelConfigurations.plist; sourceTree = "<group>"; };
 		3F7214991D282BB100EF9399 /* LevelConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelConfigurations.swift; sourceTree = "<group>"; };
 		3F7755EF1D32F4F4005484F1 /* Locked.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locked.swift; sourceTree = "<group>"; };
+		3F84AF4B1D36D137001EF670 /* LevelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelCell.swift; sourceTree = "<group>"; };
 		3FD28FB11D2050FA004F1964 /* Touch.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Touch.caf; sourceTree = "<group>"; };
 		3FD28FB31D2053EC004F1964 /* Alert.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Alert.caf; sourceTree = "<group>"; };
 		3FE1690A1D1ECFAD0038A7B3 /* ProgressNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressNode.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				3F7214991D282BB100EF9399 /* LevelConfigurations.swift */,
 				3F7214971D2821BB00EF9399 /* LevelConfigurations.plist */,
 				3F1C77E41D2DAC8300FA8A81 /* LevelsViewController.swift */,
+				3F84AF4B1D36D137001EF670 /* LevelCell.swift */,
 				3FF8EB531D1C7E450049A07F /* TouchPad.swift */,
 				3FF03A761D1DEFBB009180B2 /* GameOverNode.swift */,
 				3FE1690A1D1ECFAD0038A7B3 /* ProgressNode.swift */,
@@ -239,6 +242,7 @@
 				3F17F4101D357BC60050865F /* Moving.swift in Sources */,
 				3FF8EB441D1C65840049A07F /* GameViewController.swift in Sources */,
 				3FF8EB3E1D1C65840049A07F /* AppDelegate.swift in Sources */,
+				3F84AF4C1D36D137001EF670 /* LevelCell.swift in Sources */,
 				3FE1690B1D1ECFAD0038A7B3 /* ProgressNode.swift in Sources */,
 				3FF8EB561D1C9A080049A07F /* ColorExtension.swift in Sources */,
 				3FF03A771D1DEFBB009180B2 /* GameOverNode.swift in Sources */,

@@ -24,7 +24,7 @@ class Moving: BaseGameScene, EighteenTouchPads, Moveable {
                 let p3Index = self.index(x: 0, y: 2),
                 let p4Index = self.index(x: 0, y: 0){
                 let points = [touchPads[p1Index].position, touchPads[p2Index].position, touchPads[p3Index].position, touchPads[p4Index].position, touchPads[currentIndex].position]
-                self.moveTouchPad(touchPads[currentIndex], time: 30.0, points: points, loops: -1)
+                self.moveTouchPad(touchPads[currentIndex], time: 45.0, points: points, loops: -1)
             }
         }
         for (x,y) in [(2,0),(2,1)] {
@@ -34,7 +34,7 @@ class Moving: BaseGameScene, EighteenTouchPads, Moveable {
                 let p3Index = self.index(x: 0, y: 0),
                 let p4Index = self.index(x: 2, y: 0){
                 let points = [touchPads[p1Index].position, touchPads[p2Index].position, touchPads[p3Index].position, touchPads[p4Index].position, touchPads[currentIndex].position]
-                self.moveTouchPad(touchPads[currentIndex], time: 30.0, points: points, loops: -1)
+                self.moveTouchPad(touchPads[currentIndex], time: 45.0, points: points, loops: -1)
             }
         }
         for (x,y) in [(1,2),(2,2)] {
@@ -44,7 +44,7 @@ class Moving: BaseGameScene, EighteenTouchPads, Moveable {
                 let p3Index = self.index(x: 2, y: 0),
                 let p4Index = self.index(x: 2, y: 2){
                 let points = [touchPads[p1Index].position, touchPads[p2Index].position, touchPads[p3Index].position, touchPads[p4Index].position, touchPads[currentIndex].position]
-                self.moveTouchPad(touchPads[currentIndex], time: 30.0, points: points, loops: -1)
+                self.moveTouchPad(touchPads[currentIndex], time: 45.0, points: points, loops: -1)
             }
         }
             for (x,y) in [(0,1),(0,2)] {

@@ -34,7 +34,10 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         
         //tag the cells of the table view
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        //tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        //tag the cells of our custom class
+        tableView.registerClass(LevelCell.self, forCellReuseIdentifier: "LevelCell")
         
     }
     
@@ -61,10 +64,8 @@ class LevelsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //MARK: UITableViewDelegate and UITableViewDataSource methods
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        cell.accessoryType = .DisclosureIndicator
-        cell.textLabel?.attributedText = self.makeAttributedString(title: self.levels[indexPath.row], subtitle: "")
-        cell.textLabel?.numberOfLines = 0
+        let cell = tableView.dequeueReusableCellWithIdentifier("LevelCell", forIndexPath: indexPath) as! LevelCell
+        cell.setUpCell(self.levels[indexPath.row])
         return cell
     }
     

@@ -23,7 +23,7 @@ class LevelCell: UITableViewCell {
         //cell.textLabel?.attributedText = self.makeAttributedString(title: self.levels[indexPath.row], subtitle: "")
         
         //we add an image
-        self.imageView?.image = createDisk(30.0, imageName: "default")
+        self.imageView?.image = createDisk(30.0, imageName: "default", unlocked: false)
         
     }
     
@@ -32,13 +32,20 @@ class LevelCell: UITableViewCell {
     /**
     Create a disk of a certain radius based on an image sample
     */
-    func createDisk(radius: CGFloat, imageName: String) -> UIImage?{
+    func createDisk(radius: CGFloat, imageName: String, unlocked: Bool) -> UIImage?{
         let size = CGSize(width: radius * 2, height: radius * 2)
         if let image = UIImage(named: imageName){
             let resizedImage = resizeImage(size, image: image)
             let roundedImage = maskRoundedImage(resizedImage, radius: radius, strokeColor: UIColor.grayColor())
-            let alphaImage = setAlpha(roundedImage, value: 0.2)
-            return alphaImage
+            
+            //we change the alpha and add a lock icon if the level is still locked
+            if !unlocked{
+                let alphaImage = setAlpha(roundedImage, value: 0.5)
+                let lockedImage = addLock(alphaImage)
+                return lockedImage
+            } else {
+                return roundedImage
+            }
         } else {
             print("no image available for \(imageName)")
             return nil
@@ -105,6 +112,35 @@ class LevelCell: UITableViewCell {
         UIGraphicsEndImageContext();
         
         return newImage;
+    }
+    
+    /**
+    Convenient method to add a lock in top of an image
+    */
+    func addLock(bottomImage: UIImage) -> UIImage{
+        if let topImage = UIImage(named: "lock"){
+            let size = bottomImage.size
+            let hasAlpha = false //false to handle potential transparency
+            let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+            
+            
+            UIGraphicsBeginImageContextWithOptions(size, hasAlpha, scale)
+            bottomImage.drawInRect(CGRect(origin: CGPointZero, size: size))
+            
+            //we want the lock to be half the size of the other image
+            let topPointOrigin = CGPointMake(size.width / 4, size.height / 4)
+            let topSize = CGSizeMake(size.width / 2, size.width / 2)
+            topImage.drawInRect(CGRect(origin: topPointOrigin, size: topSize))
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            return newImage
+        } else {
+            print("lock image not found")
+            return bottomImage
+        }
+        
+
     }
 
 }

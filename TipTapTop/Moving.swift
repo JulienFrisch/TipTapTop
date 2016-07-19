@@ -54,11 +54,10 @@ class Moving: BaseGameScene, EighteenTouchPads, Moveable {
                     let p3Index = self.index(x: 2, y: 2),
                     let p4Index = self.index(x: 0, y: 2){
                     let points = [touchPads[p1Index].position, touchPads[p2Index].position, touchPads[p3Index].position, touchPads[p4Index].position, touchPads[currentIndex].position]
-                    self.moveTouchPad(touchPads[currentIndex], time: 30.0, points: points, loops: -1)
+                    self.moveTouchPad(touchPads[currentIndex], time: 45.0, points: points, loops: -1)
                 }
         }
         
-        //self.moveTouchPad(self.touchPads[0], time: 3.0, points: [self.touchPads[12].position,self.touchPads[14].position, self.touchPads[2].position, self.touchPads[0].position], loops: -1)
     }
     
     /**

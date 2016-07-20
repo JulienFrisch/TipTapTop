@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>test</key>
+	<string></string>
+	<key>Level_1</key>
+	<dict>
+		<key>name</key>
+		<string>Vanilla_Easy</string>
+		<key>unlocked</key>
+		<true/>
+	</dict>
+	<key>Level_2</key>
+	<dict>
+		<key>name</key>
+		<string>MultiTouch_Easy</string>
+		<key>unlocked</key>
+		<false/>
+	</dict>
+</dict>
+</plist>

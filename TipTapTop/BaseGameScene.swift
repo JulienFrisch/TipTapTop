@@ -55,6 +55,13 @@ class BaseGameScene: SKScene {
     //MARK: SKScene functions
     override func didMoveToView(view: SKView) {
         do{
+            //TEST
+            //let dico: NSDictionary = ["test":"youhou"]
+            //PListManager.saveLevelData(dico)
+            print("ok")
+            //try PListManager.writeInFile("LevelProgress", ofType: "plist", key: "test", value: "tolo")
+            
+            
             //we make sure that multiple touch is enabled
             self.view?.multipleTouchEnabled = true
 
